@@ -14,4 +14,8 @@ public abstract class Staff{
 
   }
 
+  public int getId(){
+    return this.id;
+  }
+
 }

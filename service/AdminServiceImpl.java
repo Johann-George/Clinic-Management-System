@@ -1,13 +1,16 @@
+package service;
+
 import repo.IAdminRepo;
 import repo.AdminRepoImpl;
+import models.Staff;
 
 public class AdminServiceImpl implements IAdminService{
 
   private IAdminRepo adminRepo;
 
-  public AdminServiceImpl(AdminRepoImpl adminRepo){
+  public AdminServiceImpl(){
 
-    this.adminRepo = adminRepo;
+    this.adminRepo = new AdminRepoImpl();
 
   }
 
@@ -17,7 +20,8 @@ public class AdminServiceImpl implements IAdminService{
   }
 
   @Override
-  public void deleteStaff(Staff staff){
+  public void deleteStaff(int id){
+    Staff staff = adminRepo.getStaffById(id);
     adminRepo.removeStaff(staff);
   }
 
