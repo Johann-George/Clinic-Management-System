@@ -28,4 +28,9 @@ public class AdminRepoImpl implements IAdminRepo{
     staffList.remove(staff);
   }
 
+  @Override
+  public List<Staff> getAllStaff(){
+    return staffList;
+  }
+
 }

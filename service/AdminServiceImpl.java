@@ -1,5 +1,6 @@
 package service;
 
+import java.util.List;
 import repo.IAdminRepo;
 import repo.AdminRepoImpl;
 import models.Staff;
@@ -23,6 +24,11 @@ public class AdminServiceImpl implements IAdminService{
   public void deleteStaff(int id){
     Staff staff = adminRepo.getStaffById(id);
     adminRepo.removeStaff(staff);
+  }
+
+  @Override
+  public List<Staff> displayAllStaff(){
+    return adminRepo.getAllStaff();
   }
 
 }
