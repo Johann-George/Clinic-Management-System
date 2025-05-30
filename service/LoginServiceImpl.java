@@ -1,6 +1,6 @@
 package service;
 
-import models.User;
+import models.Staff;
 import repo.ILoginRepo;
 import repo.LoginRepoImpl;
 import java.util.Map;
@@ -14,17 +14,17 @@ public class LoginServiceImpl implements ILoginService{
   }
 
   @Override
-  public void addLoginCredentials(User user){
-    adminRepo.addLoginCredentials(user);
+  public void addLoginCredentials(Staff staff){
+    loginRepo.addLoginCredentials(staff);
   }
 
   @Override
-  public User validateLogin(String username, String password){
-    for(Map.Entry<String,User> validate: (loginRepo.validateLogin()).entrySet()){
+  public Staff validateLogin(String username, String password){
+    for(Map.Entry<String,Staff> validate: (loginRepo.validateLogin()).entrySet()){
       if(username.equals(validate.getKey())){
-        User user = validate.getValue().get(username);
-        if(user.getPassword().equals(password)){
-          return user;
+        Staff staff = validate.getValue();
+        if(staff.getPassword().equals(password)){
+          return staff;
         }
       }
     }

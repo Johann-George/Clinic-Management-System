@@ -1,6 +1,7 @@
 package app;
 
 import java.util.Scanner;
+import models.Role;
 import models.Staff;
 import models.Doctor;
 import models.Receptionist;
@@ -9,7 +10,7 @@ import models.LabTechnician;
 import service.AdminServiceImpl;
 import service.IAdminService;
 import service.ILoginService;
-import service.LoginServceImpl;
+import service.LoginServiceImpl;
 
 public class AdminDashboard{
 
@@ -18,7 +19,7 @@ public class AdminDashboard{
     while(true){
     
       IAdminService adminService = new AdminServiceImpl();
-      ILoginService loginService = new LoginServceImpl();
+      ILoginService loginService = new LoginServiceImpl();
       System.out.println("1.Add Staff\n2.Delete Staff\n3.Display All Staff\n4.Exit");
       System.out.println("Enter choice:");
       int choice = sc.nextInt();
@@ -53,7 +54,8 @@ public class AdminDashboard{
     System.out.println("1.Doctor\n2.Receptionist\n3.Pharmacist\n4.Lab Technician");
     System.out.println("Enter choice:");
     int choice = sc.nextInt();
-    User user = null;
+    Staff staff = null;
+    Role role = null;
     System.out.println("Enter ID:");
     int id = sc.nextInt();
     sc.nextLine();
@@ -66,30 +68,27 @@ public class AdminDashboard{
       case 1:
         System.out.println("Enter specialization:");
         String spec = sc.nextLine();
-        user = new User(name,dob,2,null);
-        Doctor dotctor = new Doctor(id,name,spec,user,dob);
-        user = new User(name,dob,2,doctor);
-        loginService.addLoginCredentials(user);
+        role = new Role(1,"Doctor");
+        staff = new Doctor(id,name,spec,dob,name,dob,role);
+        loginService.addLoginCredentials(staff);
         break;
 
       case 2:
-        user = new User(name,dob,3,null);
-        Receptionist receptionist= new Receptionist(id,name,user,dob);
-        user = new User(name,dob,3,receptionist);
-        loginService.addLoginCredentials(user);
+        role = new Role(2,"Receptionist");
+        staff = new Receptionist(id,name,dob,name,dob,role);
+        loginService.addLoginCredentials(staff);
         break;
 
       case 3:
-        user = new User(name,dob,4,null);
-        Pharmacist pharmacist = new Pharmacist(id,name,user,dob);
-        user = new User(name,dob,4,pharmacist);
-        loginService.addLoginCredentials(user);
+        role = new Role(3,"Pharmacist");
+        staff = new Pharmacist(id,name,dob,name,dob,role);
+        loginService.addLoginCredentials(staff);
         break;
 
       case 4:
-        user = new User(name,dob,5);
-        staff = new LabTechnician(id,name,user,dob);
-        loginService.addLoginCredentials(user);
+        role = new Role(4,"Lab Technician");
+        staff = new LabTechnician(id,name,dob,name,dob,role);
+        loginService.addLoginCredentials(staff);
         break;
     
       default:

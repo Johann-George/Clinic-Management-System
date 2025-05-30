@@ -1,10 +1,10 @@
 package service;
 
-import models.User;
+import models.Staff;
 
 public interface ILoginService{
 
-  void addLoginCredentials(User user);
-  User validateLogin(String username,String password);
+  void addLoginCredentials(Staff staff);
+  Staff validateLogin(String username,String password);
 
 }

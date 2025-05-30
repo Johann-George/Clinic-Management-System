@@ -1,11 +1,11 @@
 package repo;
 
 import java.util.Map;
-import models.User;
+import models.Staff;
 
 public interface ILoginRepo{
 
-  void addLoginCredentials(User user);
-  Map<String,User> validateLogin();
+  void addLoginCredentials(Staff staff);
+  Map<String,Staff> validateLogin();
 
 }

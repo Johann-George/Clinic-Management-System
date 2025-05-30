@@ -4,9 +4,9 @@ public class Doctor extends Staff{
 
   private String specialization;
 
-  public Doctor(int id, String name, String specialization, User user, String dob){
+  public Doctor(int id, String name, String specialization, String dob, String username, String password, Role role){
 
-    super(id,name,user,dob);
+    super(id,name,dob,username,password,role);
     this.specialization = specialization;
 
   }

@@ -1,24 +1,27 @@
 package app;
 
 import java.util.Scanner;
+import service.ILoginService;
+import service.LoginServiceImpl;
+import models.Staff;
 
+//To compile use: javac -d bin Main.java
+//To run use: java -cp bin Main
 public class Main{
 
   private static Scanner sc = new Scanner(System.in);
   ILoginService loginService = new LoginServiceImpl();
 
-  public static void main(String[] args) {
+  public void mainDashboard(){
     
+    AdminDashboard.runAdminPanel(sc);
     while(true){
       System.out.println("Enter Username:");
       String username = sc.nextLine();
       System.out.println("Enter Password:");
       String password = sc.nextLine();
-      User user = loginService.validateLogin(username,password);
-      switch (user.getRole()) {
-        case "Admin":
-          AdminDashboard.runAdminPanel(sc);
-          break;
+      Staff staff = loginService.validateLogin(username,password);
+      switch (staff.getRole()) {
 
         case "Doctor":
           System.out.println("Doctor dashboard coming soon..");
@@ -48,5 +51,10 @@ public class Main{
     }
 
   }
+  public static void main(String[] args){
+      Main main = new Main();
+      main.mainDashboard();
+  }
+
 
 }

@@ -4,15 +4,19 @@ public abstract class Staff{
 
   protected int id;
   protected String name;
-  protected User user;
   protected String dob;
+  protected String username;
+  protected String password;
+  protected Role role;
 
-  public Staff(int id, String name, User user, String dob){
+  public Staff(int id, String name, String dob, String username, String password, Role role){
   
     this.id = id;
     this.name = name;
-    this.user = user;
     this.dob = dob;
+    this.username = username;
+    this.password = password;
+    this.role = role;
 
   }
 
@@ -24,12 +28,20 @@ public abstract class Staff{
     return this.name;
   }
 
-  public String getRole(){
-    return this.user.getRole();
-  }
-
   public String getDob(){
     return this.dob;
+  }
+
+  public String getUsername(){
+    return this.username;
+  }
+
+  public String getPassword(){
+    return this.password;
+  }
+
+  public String getRole(){
+    return this.role.roleName;
   }
 
 }
