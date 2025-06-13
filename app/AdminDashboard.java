@@ -16,10 +16,10 @@ public class AdminDashboard{
 
   public static void runAdminPanel(Scanner sc){
 
+    IAdminService adminService = new AdminServiceImpl();
+    ILoginService loginService = new LoginServiceImpl();
     while(true){
     
-      IAdminService adminService = new AdminServiceImpl();
-      ILoginService loginService = new LoginServiceImpl();
       System.out.println("1.Add Staff\n2.Delete Staff\n3.Display All Staff\n4.Exit");
       System.out.println("Enter choice:");
       int choice = sc.nextInt();
@@ -34,7 +34,7 @@ public class AdminDashboard{
       
         case 3:
           for(Staff s : adminService.displayAllStaff()){
-            System.out.println("Staff ID:"+s.getId()+"Staff Name:"+s.getName()+"Staff Role:"+s.getRole());
+            System.out.println("Staff ID:"+s.getId()+"\tStaff Name:"+s.getName()+"\tStaff Role:"+s.getRole());
           }
           break;
 

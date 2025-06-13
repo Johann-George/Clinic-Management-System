@@ -13,9 +13,21 @@ public class Main{
   ILoginService loginService = new LoginServiceImpl();
 
   public void mainDashboard(){
-    
-    AdminDashboard.runAdminPanel(sc);
+    System.out.println("======Admin Login/Register======");
+    System.out.println("Enter Username:");
+    String AdminUserName = sc.nextLine();
+    System.out.println("Enter Password:");
+    String AdminPassword = sc.nextLine();
+    if(AdminUserName.equals("root") && AdminPassword.equals("root")){
+      AdminDashboard.runAdminPanel(sc);
+    }
+    else{
+      System.out.println("Incorrect Username or password. Please try again!");
+      continue;
+    }
     while(true){
+      
+      System.out.println("=====Staff Login/Register====");
       System.out.println("Enter Username:");
       String username = sc.nextLine();
       System.out.println("Enter Password:");
