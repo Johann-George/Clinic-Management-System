@@ -14,10 +14,8 @@ import service.LoginServiceImpl;
 
 public class AdminDashboard{
 
-  public static void runAdminPanel(Scanner sc){
+  public static void runAdminPanel(Scanner sc,IAdminService adminService, ILoginService loginService){
 
-    IAdminService adminService = new AdminServiceImpl();
-    ILoginService loginService = new LoginServiceImpl();
     while(true){
     
       System.out.println("1.Add Staff\n2.Delete Staff\n3.Display All Staff\n4.Exit");

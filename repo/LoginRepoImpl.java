@@ -11,7 +11,6 @@ public class LoginRepoImpl implements ILoginRepo{
   @Override
   public void addLoginCredentials(Staff staff){
     staffMap.put(staff.getUsername(),staff);
-    System.out.println("Entered here");
   }
 
   @Override

@@ -20,7 +20,10 @@ public class LoginServiceImpl implements ILoginService{
 
   @Override
   public Staff validateLogin(String username, String password){
-    for(Map.Entry<String,Staff> validate: (loginRepo.validateLogin()).entrySet()){
+    if(loginRepo.validateLogin().isEmpty()){
+      System.out.println("List is empty");
+    }
+    for(Map.Entry<String,Staff> validate: loginRepo.validateLogin().entrySet()){
       if(username.equals(validate.getKey())){
         Staff staff = validate.getValue();
         if(staff.getPassword().equals(password)){

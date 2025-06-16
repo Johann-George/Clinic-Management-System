@@ -2,7 +2,11 @@ package app;
 
 import java.util.Scanner;
 import service.ILoginService;
+import service.IConsultationService;
 import service.LoginServiceImpl;
+import service.IAdminService;
+import service.AdminServiceImpl;
+import service.ConsultationServiceImpl;
 import models.Staff;
 
 //To compile use: javac -d bin Main.java
@@ -10,24 +14,39 @@ import models.Staff;
 public class Main{
 
   private static Scanner sc = new Scanner(System.in);
-  ILoginService loginService = new LoginServiceImpl();
 
   public void mainDashboard(){
+
+    IAdminService adminService = new AdminServiceImpl();
+    ILoginService loginService = new LoginServiceImpl(); 
+    IConsultationService consultationService = new ConsultationServiceImpl();
+
+    //Admin Login and dashboard
     System.out.println("======Admin Login/Register======");
     System.out.println("Enter Username:");
     String AdminUserName = sc.nextLine();
     System.out.println("Enter Password:");
     String AdminPassword = sc.nextLine();
-    if(AdminUserName.equals("root") && AdminPassword.equals("root")){
-      AdminDashboard.runAdminPanel(sc);
+    int attempt = 0;
+    while(attempt!=3){
+      if(AdminUserName.equals("admin") && AdminPassword.equals("root")){
+        AdminDashboard.runAdminPanel(sc, adminService, loginService);
+        break;
+      }
+      else{
+        System.out.println("Incorrect Username or password. Please try again!");
+        attempt++;
+      }
     }
-    else{
-      System.out.println("Incorrect Username or password. Please try again!");
-      continue;
+    if(attempt == 3){
+      return;
     }
+
+    //Staff Login and Dashboard
     while(true){
       
-      System.out.println("=====Staff Login/Register====");
+      System.out.println("=====Staff Login=====");
+      sc.nextLine();
       System.out.println("Enter Username:");
       String username = sc.nextLine();
       System.out.println("Enter Password:");
@@ -36,7 +55,7 @@ public class Main{
       switch (staff.getRole()) {
 
         case "Doctor":
-          System.out.println("Doctor dashboard coming soon..");
+          DoctorDashboard.runDoctorPanel(sc, consultationService);
           break;
 
         case "Receptionist":
