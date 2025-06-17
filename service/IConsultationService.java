@@ -9,7 +9,7 @@ public interface IConsultationService{
 
   Consultation conductConsultation(String patientId, String diagnosis);
   List<Consultation> getPatientHistory(String patientId);
-  void addMedicine(String consultationId, String medicine);
-  void addLabTest(String consultationId, String LabTest);
+  void addMedicine(String consultationId, List<String> medicine);
+  void addLabTest(String consultationId, List<String> LabTest);
 
 }

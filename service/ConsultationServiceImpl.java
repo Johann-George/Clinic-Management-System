@@ -35,13 +35,13 @@ public class ConsultationServiceImpl implements IConsultationService{
   }
 
   @Override
-  public void addMedicine(String consultationId, String medicine){
+  public void addMedicine(String consultationId, List<String> medicine){
     Consultation consultation = consultationRepo.getConsultationById(consultationId); 
     consultation.addMedicine(medicine);
   }
 
   @Override
-  public void addLabTest(String consultationId, String labTest){
+  public void addLabTest(String consultationId, List<String> labTest){
     Consultation consultation = consultationRepo.getConsultationById(consultationId); 
     consultation.addLabTest(labTest);
   }

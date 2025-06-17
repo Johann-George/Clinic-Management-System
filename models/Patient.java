@@ -10,17 +10,17 @@ public class Patient{
 
   private int patient_id;
   private String name;
-  private String contact;
+  private String contactNo;
   private String address;
   private LocalDate dob; 
   private String gender;
   private List<Consultation> consultation;
 
-  public Patient(int patient_id, String name, String contact, String address, LocalDate dob, String gender){
+  public Patient(int patient_id, String name, String contactNo, String address, LocalDate dob, String gender){
 
     this.patient_id = patient_id;
     this.name = name;
-    this.contact = contact;
+    this.contactNo = contactNo;
     this.address = address;
     this.dob = dob;
     this.gender = gender;

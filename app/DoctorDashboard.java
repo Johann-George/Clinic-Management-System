@@ -55,18 +55,28 @@ public class DoctorDashboard{
   // Lab tests prescribed by the doctor are entered and displayed here
   public static void prescribeLabTest(Consultation c, Scanner sc, IConsultationService consultationService){
     
-    System.out.println("Enter the prescribed medicine:");
-    String medicine = sc.nextLine();
-    consultationService.addMedicine(c.getConsultationId(), medicine);
+    System.out.println("Enter the number of Lab Tests:");
+    int labTestNo = sc.nextInt();
+    List<String> labTest;
+    for(int i=0;i<labTestNo;i++){
+      System.out.println("Enter the prescribed Lab Test:");
+      labTest.add(sc.nextLine());
+    }
+    consultationService.addLabTest(c.getConsultationId(), labTest);
 
   }
 
   // Medicines are prescribed by the doctor are entered and displayed here
   public static void prescribeMedicine(Consultation c, Scanner sc, IConsultationService consultationService){
 
-    System.out.println("Enter the prescribed Lab Test:");
-    String LabTest = sc.nextLine();
-    consultationService.addLabTest(c.getConsultationId(), LabTest);
+    System.out.println("Enter the prescribed Medicines:");
+    int medicineNo = sc.nextInt();
+    List<String> medicine;
+    for(int i=0;i<medicineNo;i++){
+      System.out.println("Enter the prescribed Medicine:");
+      medicine.add(sc.nextLine());
+    }
+    consultationService.addMedicine(c.getConsultationId(), medicine);
 
   }
 

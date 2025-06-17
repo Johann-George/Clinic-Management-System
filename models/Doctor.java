@@ -11,4 +11,8 @@ public class Doctor extends Staff{
 
   }
 
+  public int getDoctorId(){
+    return this.id;
+  }
+
 }

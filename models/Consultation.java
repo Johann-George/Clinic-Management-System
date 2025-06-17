@@ -27,12 +27,12 @@ public class Consultation{
     return this.consultationId;
   }
 
-  public void addMedicine(String medicine){
-    this.medicine.add(medicine);
+  public void addMedicine(List<String> medicine){
+    this.medicine = medicine;
   }
 
-  public void addLabTest(String labTest){
-    this.labTest.add(labTest);
+  public void addLabTest(List<String> labTest){
+    this.labTest = labTest;
   }
 
   public String getDiagnosis(){
