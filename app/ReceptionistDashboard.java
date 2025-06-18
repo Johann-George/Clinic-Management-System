@@ -3,10 +3,11 @@ import java.util.Scanner;
 import models.Patient;
 import models.Appointment;
 import service.IAppointmentService;
+import service.IBillService;
 
 public class ReceptionistDashboard{
 
-  public static void runReceptionistPanel(Scanner sc, IAppointmentService appointmentSerivce){
+  public static void runReceptionistPanel(Scanner sc, IAppointmentService appointmentSerivce, IBillService billService){
 
     System.out.println("1.Patient Registration\n2.Appointment Scheduling\n3.Consultation Billing\n4.Daily Collection Reports\n5.Exit")
     System.out.println("Enter choice:");
@@ -22,11 +23,11 @@ public class ReceptionistDashboard{
         break;
 
       case 3:
-        consultationBilling();
+        consultationBilling(sc, billService);
         break;
 
       case 4:
-        generateCollectionReports();
+        generateCollectionReports(billService);
         break;
 
       case 5:
@@ -69,13 +70,19 @@ public class ReceptionistDashboard{
 
   }
 
-  public static void consultationBilling(){
+  public static void consultationBilling(Scanner sc, IBillService billService){
 
-
+    System.out.println("Enter the Patient ID:");
+    String patientId = sc.nextLine();
+    System.out.println("Enter the Doctor ID:");
+    String doctorId = sc.nextLine();
+    billService.consultationBilling(patientId, doctorId);
 
   }
 
-  public static void generateCollectionReports(){
+  public static void generateCollectionReports(IBillService billService){
+
+    billService.generateDailyCollectionReport();
 
   }
 

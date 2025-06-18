@@ -1,6 +1,7 @@
 package app;
 
 import java.util.Scanner;
+import java.util.List;
 
 import models.Consultation;
 import service.IConsultationService;

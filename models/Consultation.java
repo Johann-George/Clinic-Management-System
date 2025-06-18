@@ -43,4 +43,12 @@ public class Consultation{
     return this.consultationDate;
   }
 
+  public List<String> getAllMedicines(){
+    return this.medicine;
+  }
+
+  public List<String> getAllLabTests(){
+    return this.labTest;
+  }
+
 }

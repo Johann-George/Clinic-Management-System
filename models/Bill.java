@@ -1,12 +1,30 @@
+import java.util.List;
+
 public class Bill{
 
   private Patient patient;
   private Consultation consultation;
   private double consultationFee;
-  private String labTest;
-  private String medicine;
+  private List<String> labTest;
+  private List<String> medicine;
   private double totalAmount;
 
+  public Bill(Patient patient, Consultation consultation, List<String> labTest, List<String> medicine){
+    this.patient = patient;
+    this.consultation = consultation;
+    this.consultationFee = 500;
+    this.labTest = labTest;
+    this.medicine = medicine;
+  }
 
+  public double calculateTotalAmount(){
+    for(String m: medicine){
+      totalAmount+=100;
+    }
+    for(String l: labTest){
+      totalAmount+=100;
+    }
+    return totalAmount;
+  }
 
 }
