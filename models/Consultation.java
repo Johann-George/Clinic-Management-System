@@ -11,8 +11,8 @@ public class Consultation{
   private String patientId;
   private String diagnosis;
   private LocalDate consultationDate;
-  private List<String> medicine;
-  private List<String> labTest;
+  private List<List<String>> medicine;
+  private List<List<String>> labTest;
 
   public Consultation(String patientId, String diagnosis){
     this.consultationId = UUID.randomUUID().toString();
@@ -27,12 +27,16 @@ public class Consultation{
     return this.consultationId;
   }
 
+  public String getPatientId(){
+    return this.patientId;
+  }
+
   public void addMedicine(List<String> medicine){
-    this.medicine = medicine;
+    this.medicine.add(medicine);
   }
 
   public void addLabTest(List<String> labTest){
-    this.labTest = labTest;
+    this.labTest.add(labTest);
   }
 
   public String getDiagnosis(){

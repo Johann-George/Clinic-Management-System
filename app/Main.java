@@ -7,7 +7,9 @@ import service.LoginServiceImpl;
 import service.IAdminService;
 import service.IAppointmentService;
 import service.AdminServiceImpl;
+import service.IBillService;
 import service.AppointmentServiceImpl;
+import service.BillServiceImpl;
 import service.ConsultationServiceImpl;
 import models.Staff;
 
@@ -23,6 +25,7 @@ public class Main{
     ILoginService loginService = new LoginServiceImpl(); 
     IConsultationService consultationService = new ConsultationServiceImpl();
     IAppointmentService appointmentService = new AppointmentServiceImpl();
+    IBillService billService = new BillServiceImpl();
 
     //Admin Login and dashboard
     System.out.println("======Admin Login/Register======");
@@ -62,7 +65,7 @@ public class Main{
           break;
 
         case "Receptionist":
-          ReceptionistDashboard.runReceptionistPanel(sc, appointmentService);
+          ReceptionistDashboard.runReceptionistPanel(sc, appointmentService, billService);
           break;
 
         case "Pharmacist":
@@ -74,7 +77,7 @@ public class Main{
           break;
 
         case "Patient":
-          System.out.println("Patient dashboard coming soon..");
+          PatientDashboard.runPatientPanel(sc);
           break;
 
         default:

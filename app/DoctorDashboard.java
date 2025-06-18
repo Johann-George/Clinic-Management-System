@@ -1,6 +1,7 @@
 package app;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.List;
 
 import models.Consultation;
@@ -58,7 +59,7 @@ public class DoctorDashboard{
     
     System.out.println("Enter the number of Lab Tests:");
     int labTestNo = sc.nextInt();
-    List<String> labTest;
+    List<String> labTest = new ArrayList<>();
     for(int i=0;i<labTestNo;i++){
       System.out.println("Enter the prescribed Lab Test:");
       labTest.add(sc.nextLine());
@@ -72,7 +73,7 @@ public class DoctorDashboard{
 
     System.out.println("Enter the prescribed Medicines:");
     int medicineNo = sc.nextInt();
-    List<String> medicine;
+    List<String> medicine = new ArrayList<>();
     for(int i=0;i<medicineNo;i++){
       System.out.println("Enter the prescribed Medicine:");
       medicine.add(sc.nextLine());
