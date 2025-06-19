@@ -37,7 +37,18 @@ public class BillServiceImpl implements IBillService{
     for(Bill bill : billRepo.getAllBills()){
       System.out.println("Patient Name:"+bill.getPatientName()+"\nTotal Amount:"+bill.getTotalAmount());
       System.out.println();
-   }
+    }
+
+  }
+
+  @Override
+  public void generatePatientBillingHistory(String patientId){
+
+    for(Bill bill : billRepo.getAllBills()){
+      if(bill.getPatient().getPatientId().equals(patientId)){
+        System.out.println("Billed Amount:"+bill.getTotalAmount());
+      }
+    }
 
   }
 

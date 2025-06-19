@@ -15,6 +15,7 @@ public class Bill{
     this.consultationFee = 500;
     this.labTest = labTest;
     this.medicine = medicine;
+    this.totalAmount = calculateTotalAmount();
   }
 
   public double calculateTotalAmount(){
@@ -25,6 +26,10 @@ public class Bill{
       totalAmount+=100;
     }
     return totalAmount;
+  }
+
+  public double getTotalAmount(){
+    return this.totalAmount;
   }
 
 }

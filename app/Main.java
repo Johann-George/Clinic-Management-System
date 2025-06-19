@@ -11,6 +11,8 @@ import service.IBillService;
 import service.AppointmentServiceImpl;
 import service.BillServiceImpl;
 import service.ConsultationServiceImpl;
+import service.IPatientService;
+import service.PatientServiceImpl;
 import models.Staff;
 
 //To compile use: javac -d bin Main.java
@@ -26,6 +28,7 @@ public class Main{
     IConsultationService consultationService = new ConsultationServiceImpl();
     IAppointmentService appointmentService = new AppointmentServiceImpl();
     IBillService billService = new BillServiceImpl();
+    IPatientService patientService = new PatientServiceImpl();
 
     //Admin Login and dashboard
     System.out.println("======Admin Login/Register======");
@@ -77,7 +80,7 @@ public class Main{
           break;
 
         case "Patient":
-          PatientDashboard.runPatientPanel(sc);
+          PatientDashboard.runPatientPanel(sc, appointmentService, patientService, billService);
           break;
 
         default:

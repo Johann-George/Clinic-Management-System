@@ -2,7 +2,6 @@ package service;
 
 public interface IAppointmentService{
 
-  void appointmentScheduling();
-  void tokenGeneration();
+  void appointmentScheduling(String patientId, String doctorId);
 
 }
