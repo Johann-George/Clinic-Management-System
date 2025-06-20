@@ -7,7 +7,7 @@ public class User{
   private String username;
   private String password;
   private String role;
-  private Staff staff;//bidirectional link
+  private Staff staff;
 
   public User(String username, String password, String role, Staff staff){
     this.username = username;

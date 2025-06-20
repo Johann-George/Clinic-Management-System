@@ -49,17 +49,16 @@ public class AdminDashboard{
 
   public static void addStaff(Scanner sc,IAdminService adminService,ILoginService loginService){
 
+    System.out.println("===========================");
     System.out.println("1.Doctor\n2.Receptionist\n3.Pharmacist\n4.Lab Technician");
     System.out.println("Enter choice:");
     int choice = sc.nextInt();
     Staff staff = null;
     Role role = null;
-    System.out.println("Enter ID:");
-    int id = sc.nextInt();
     sc.nextLine();
     System.out.println("Enter name:");
     String name = sc.nextLine();
-    System.out.println("Enter DOB:(format : dd/mm/yyyy)");
+    System.out.println("Enter DOB(format : dd/mm/yyyy):");
     String dob = sc.nextLine();
 
     switch (choice) {
@@ -67,25 +66,25 @@ public class AdminDashboard{
         System.out.println("Enter specialization:");
         String spec = sc.nextLine();
         role = new Role(1,"Doctor");
-        staff = new Doctor(id,name,spec,dob,name,dob,role);
+        staff = new Doctor(name,spec,dob,name,dob,role);
         loginService.addLoginCredentials(staff);
         break;
 
       case 2:
         role = new Role(2,"Receptionist");
-        staff = new Receptionist(id,name,dob,name,dob,role);
+        staff = new Receptionist(name,dob,name,dob,role);
         loginService.addLoginCredentials(staff);
         break;
 
       case 3:
         role = new Role(3,"Pharmacist");
-        staff = new Pharmacist(id,name,dob,name,dob,role);
+        staff = new Pharmacist(name,dob,name,dob,role);
         loginService.addLoginCredentials(staff);
         break;
 
       case 4:
         role = new Role(4,"Lab Technician");
-        staff = new LabTechnician(id,name,dob,name,dob,role);
+        staff = new LabTechnician(name,dob,name,dob,role);
         loginService.addLoginCredentials(staff);
         break;
     
@@ -101,7 +100,7 @@ public class AdminDashboard{
   public static void deleteStaff(Scanner sc,IAdminService adminService){
 
     System.out.println("Enter the ID:");
-    int id = sc.nextInt();
+    String id = sc.nextLine();
     adminService.deleteStaff(id);
     System.out.println("Staff is removed successfully!");
 

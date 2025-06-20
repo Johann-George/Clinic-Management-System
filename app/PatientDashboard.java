@@ -1,10 +1,14 @@
 package app;
 
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.ArrayList;
 
 import service.IAppointmentService;
 import service.IPatientService;
 import service.IBillService;
+import models.Consultation;
 
 public class PatientDashboard{
   
@@ -24,11 +28,12 @@ public class PatientDashboard{
         break;
 
       case 3:
-        viewLabReports();
+        //viewLabReports();
+        System.out.println("View Lab reports coming soon");
         break;
 
       case 4:
-        billingHistory(sc, billingService);
+        billingHistory(sc, billService);
         break;
     
       default:
@@ -39,26 +44,28 @@ public class PatientDashboard{
 
   public static void bookAppointment(Scanner sc, IAppointmentService appointmentService){
 
-    System.out.println("Enter the Patient ID:");
-    String patientId = sc.nextLine();
+    System.out.println("Enter the Patient Username:");
+    String patientName= sc.nextLine();
     System.out.println("Enter the Doctor ID:");
     String doctorId = sc.nextLine();
-    appointmentService.appointmentScheduling(patientId, doctorId);
+    appointmentService.appointmentScheduling(patientName, doctorId);
 
   }
 
   public static void viewPrescription(Scanner sc, IPatientService patientService){
 
-    System.out.println("Enter the patient ID:");
-    String patientId = sc.nextLine();
+    List<String> medicine = new ArrayList<>();
+    List<String> labTest = new ArrayList<>();
+    System.out.println("Enter the patient Name:");
+    String patientName = sc.nextLine();
     System.out.println("Enter the consultation Date:");
     String dt = sc.nextLine();
     LocalDate date = LocalDate.parse(dt);
     System.out.println("The prescriptions in sorted by Date:");
-    for(Consultation c : patientService.viewPrescription(patientId)){
-      if(c.getDate().equals(date)){
-        List<String> medicine = new ArrayList<>(c.getMedicine());
-        List<String> labTest = new ArrayList<>(c.getLabTest());
+    for(Consultation c : patientService.viewPrescription(patientName)){
+      if(c.getConsultationDate().equals(date)){
+        medicine.addAll(c.getAllMedicines());
+        labTest.addAll(c.getAllLabTests());
       }
     }
     System.out.println("Medicines:");
@@ -74,9 +81,9 @@ public class PatientDashboard{
 
   public static void billingHistory(Scanner sc, IBillService billService){
 
-    System.out.println("Enter the patient ID:");
-    String patientId = sc.nextLine();
-    billService.generatePatientBillingHistory(patientId);
+    System.out.println("Enter the patient Name:");
+    String patientName = sc.nextLine();
+    billService.generatePatientBillingHistory(patientName);
 
   }
 

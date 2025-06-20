@@ -1,3 +1,5 @@
+package models;
+
 import java.util.List;
 
 public class Bill{
@@ -30,6 +32,14 @@ public class Bill{
 
   public double getTotalAmount(){
     return this.totalAmount;
+  }
+
+  public String getPatientName(){
+    return this.patient.getPatientName();
+  }
+
+  public String getPatientId(){
+    return this.patient.getPatientId();
   }
 
 }

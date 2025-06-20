@@ -23,9 +23,9 @@ public class DoctorDashboard{
         break;
 
       case 2:
-        System.out.println("Enter the patient ID:");
-        String patientId = sc.nextLine();
-        for(Consultation c1: consultationService.getPatientHistory(patientId)){
+        System.out.println("Enter the patient Username:");
+        String patientName = sc.nextLine();
+        for(Consultation c1: consultationService.getPatientHistory(patientName)){
           System.out.println("Consultation ID:"+c1.getConsultationId()+"Diagnosis Details:"+c1.getDiagnosis()+"Consultation Date:"+c1.getConsultationDate()); 
         }
         break;
@@ -45,11 +45,11 @@ public class DoctorDashboard{
 
     System.out.println("Enter patient details:");
     sc.nextLine();
-    System.out.println("Enter the patient ID:");
-    String patientId = sc.nextLine();
+    System.out.println("Enter the Patient Username:");
+    String patientName = sc.nextLine();
     System.out.println("Enter the diagnosis details:");
     String diagnosisDetails = sc.nextLine();
-    Consultation consultation = consultationService.conductConsultation(patientId, diagnosisDetails);
+    Consultation consultation = consultationService.conductConsultation(patientName, diagnosisDetails);
     return consultation;
 
   }

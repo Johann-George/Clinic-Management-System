@@ -5,20 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Consultation;
+import service.IDGenerator;
 
 public class Patient{
 
-  private int patient_id;
+  private String patient_id;
   private String name;
   private String contactNo;
   private String address;
-  private LocalDate dob; 
+  private LocalDate dob;
   private String gender;
   private List<Consultation> consultation;
 
-  public Patient(int patient_id, String name, String contactNo, String address, LocalDate dob, String gender){
+  public Patient(String name, String contactNo, String address, LocalDate dob, String gender){
 
-    this.patient_id = patient_id;
+    this.patient_id = IDGenerator.generateID("PAT");
     this.name = name;
     this.contactNo = contactNo;
     this.address = address;
@@ -28,7 +29,7 @@ public class Patient{
 
   }
 
-  public int getPatientId(){
+  public String getPatientId(){
     return this.patient_id;
   }
 

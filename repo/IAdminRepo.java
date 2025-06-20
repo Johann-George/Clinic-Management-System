@@ -6,7 +6,7 @@ import models.Staff;
 public interface IAdminRepo{
 
   void addStaff(Staff staff);
-  Staff getStaffById(int id);
+  Staff getStaffById(String id);
   void removeStaff(Staff staff);
   List<Staff> getAllStaff();
 

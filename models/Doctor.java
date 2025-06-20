@@ -1,17 +1,17 @@
 package models;
 
+import service.IDGenerator;
+
 public class Doctor extends Staff{
 
   private String specialization;
 
-  public Doctor(int id, String name, String specialization, String dob, String username, String password, Role role){
-
-    super(id,name,dob,username,password,role);
+  public Doctor(String name, String specialization, String dob, String username, String password, Role role){
+    super("DOC",name,dob,username,password,role);
     this.specialization = specialization;
-
   }
 
-  public int getDoctorId(){
+  public String getDoctorId(){
     return this.id;
   }
 

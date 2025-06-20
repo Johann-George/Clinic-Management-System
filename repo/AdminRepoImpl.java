@@ -14,9 +14,9 @@ public class AdminRepoImpl implements IAdminRepo{
   }
 
   @Override
-  public Staff getStaffById(int id){
+  public Staff getStaffById(String id){
     for(Staff s: staffList){
-      if(s.getId()== id){
+      if(s.getId().equals(id)){
         return s;
       }
     }

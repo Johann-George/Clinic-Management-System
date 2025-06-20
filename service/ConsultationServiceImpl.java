@@ -20,17 +20,17 @@ public class ConsultationServiceImpl implements IConsultationService{
   }
 
   @Override
-  public Consultation conductConsultation(String patientId, String diagnosis){
-    Patient patient = patientRepo.getPatientById(patientId);
-    Consultation consultation = new Consultation(patientId, diagnosis);
+  public Consultation conductConsultation(String patientName, String diagnosis){
+    Patient patient = patientRepo.getPatientByName(patientName);
+    Consultation consultation = new Consultation(patientName, diagnosis);
     patient.addConsultation(consultation);
     consultationRepo.saveConsultation(consultation);
     return consultation;
   }
 
   @Override
-  public List<Consultation> getPatientHistory(String patientId){
-    Patient patient = patientRepo.getPatientById(patientId);
+  public List<Consultation> getPatientHistory(String patientName){
+    Patient patient = patientRepo.getPatientByName(patientName);
     return patient.getConsultation();
   }
 

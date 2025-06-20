@@ -1,9 +1,11 @@
 package models;
 
+import service.IDGenerator;
+
 public class Receptionist extends Staff{
 
-  public Receptionist(int id, String name, String dob, String username, String password, Role role){
-    super(id,name, dob, username, password, role);
+  public Receptionist(String name, String dob, String username, String password, Role role){
+    super("REC", name, dob, username, password, role);
   }
 
 }

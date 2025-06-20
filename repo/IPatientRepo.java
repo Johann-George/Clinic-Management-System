@@ -8,6 +8,6 @@ import java.util.List;
 public interface IPatientRepo{
 
   void savePatient(Patient patient);
-  Patient getPatientById(String patientId);
+  Patient getPatientByName(String patientId);
 
 }

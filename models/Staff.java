@@ -1,17 +1,19 @@
 package models;
 
+import service.IDGenerator;
+
 public abstract class Staff{
 
-  protected int id;
+  protected String id;
   protected String name;
   protected String dob;
   protected String username;
   protected String password;
   protected Role role;
 
-  public Staff(int id, String name, String dob, String username, String password, Role role){
+  public Staff(String id, String name, String dob, String username, String password, Role role){
   
-    this.id = id;
+    this.id = IDGenerator.generateID(id);
     this.name = name;
     this.dob = dob;
     this.username = username;
@@ -20,7 +22,7 @@ public abstract class Staff{
 
   }
 
-  public int getId(){
+  public String getId(){
     return this.id;
   }
 

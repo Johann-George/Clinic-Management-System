@@ -3,21 +3,24 @@ package service;
 import repo.IPatientRepo;
 import repo.PatientRepoImpl;
 import models.Patient;
+import models.Consultation;
 
-public class PatientServiceImpl{
+import java.time.LocalDate;
+import java.util.List;
+
+public class PatientServiceImpl implements IPatientService{
 
   private IPatientRepo patientRepo;
 
-  PatientServiceImpl(){
+  public PatientServiceImpl(){
     this.patientRepo = new PatientRepoImpl();
   }
 
   @Override
-  public List<Consultation> viewPrescriptions(String patientId, LocalDate date){
+  public List<Consultation> viewPrescription(String patientName){
 
-    Patient patient = patientRepo.getPatientById(patientId);
-    List<Consultation> consultation = patient.getConsultation();
-    consultationRepo.getConsultationByDate(date);
+    Patient patient = patientRepo.getPatientByName(patientName);
+    return patient.getConsultation();
 
   }
 

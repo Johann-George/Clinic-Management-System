@@ -6,7 +6,7 @@ import models.Staff;
 public interface IAdminService{
 
   void registerStaff(Staff staff);
-  void deleteStaff(int id);
+  void deleteStaff(String id);
   List<Staff> displayAllStaff();
 
 }

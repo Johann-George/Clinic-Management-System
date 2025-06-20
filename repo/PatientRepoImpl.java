@@ -9,16 +9,16 @@ import java.util.List;
 
 public class PatientRepoImpl implements IPatientRepo{
 
-  private Map<Integer, Patient> personMap = new HashMap<>();
+  private Map<String , Patient> personMap = new HashMap<>();
 
   @Override
   public void savePatient(Patient patient){
-    personMap.putIfAbsent(patient.getPatientId(), patient);
+    personMap.putIfAbsent(patient.getPatientName(), patient);
   }
 
   @Override
-  public Patient getPatientById(String patientId){
-    return personMap.get(patientId);
+  public Patient getPatientByName(String patientName){
+    return personMap.get(patientName);
   }
 
 }

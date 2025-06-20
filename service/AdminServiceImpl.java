@@ -22,7 +22,7 @@ public class AdminServiceImpl implements IAdminService{
   }
 
   @Override
-  public void deleteStaff(int id){
+  public void deleteStaff(String id){
     Staff staff = adminRepo.getStaffById(id);
     adminRepo.removeStaff(staff);
   }

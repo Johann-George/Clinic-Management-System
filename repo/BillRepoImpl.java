@@ -1,7 +1,10 @@
+package repo;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import repo.ConsultationRepoImpl;
+import models.Bill;
 
 public class BillRepoImpl implements IBillRepo{
 

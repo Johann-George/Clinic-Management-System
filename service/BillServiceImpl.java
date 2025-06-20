@@ -4,7 +4,11 @@ import repo.ConsultationRepoImpl;
 import repo.IConsultationRepo;
 import repo.IPatientRepo;
 import repo.PatientRepoImpl;
+import repo.IBillRepo;
+import repo.BillRepoImpl;
 import models.Bill;
+import models.Consultation;
+import models.Patient;
 
 import java.util.Scanner;
 
@@ -21,11 +25,11 @@ public class BillServiceImpl implements IBillService{
   }
 
   @Override
-  public void consultationBilling(String patientId, String consultationId){
+  public void consultationBilling(String patientName, String consultationId){
     
-    Patient patient = patientRepo.getPatientById(patientId);
+    Patient patient = patientRepo.getPatientByName(patientName);
     Consultation consultation = consultationRepo.getConsultationById(consultationId);
-    Bill bill = new Bill(patient, doctor, consultation.getAllMedicines(), consultation.getAllLabTests());
+    Bill bill = new Bill(patient, consultation, consultation.getAllMedicines(), consultation.getAllLabTests());
     billRepo.saveBill(bill);
     System.out.println("The Total Amount:"+bill.calculateTotalAmount());
 
@@ -45,7 +49,7 @@ public class BillServiceImpl implements IBillService{
   public void generatePatientBillingHistory(String patientId){
 
     for(Bill bill : billRepo.getAllBills()){
-      if(bill.getPatient().getPatientId().equals(patientId)){
+      if(bill.getPatientId().equals(patientId)){
         System.out.println("Billed Amount:"+bill.getTotalAmount());
       }
     }

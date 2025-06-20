@@ -1,9 +1,11 @@
 package models;
 
+import service.IDGenerator;
+
 public class Pharmacist extends Staff{
 
-  public Pharmacist(int id, String name, String dob, String username, String password, Role role){
-    super(id,name, dob, username, password, role);
+  public Pharmacist(String name, String dob, String username, String password, Role role){
+    super("PHA",name, dob, username, password, role);
   }
 
 }
