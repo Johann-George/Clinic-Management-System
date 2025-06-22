@@ -2,20 +2,20 @@ package repo;
 
 import java.util.Map;
 import java.util.HashMap;
-import models.Staff;
+import models.User;
 
 public class LoginRepoImpl implements ILoginRepo{
 
-  private Map<String, Staff> staffMap = new HashMap<>();
+  private Map<String, User> userMap = new HashMap<>();
 
   @Override
-  public void addLoginCredentials(Staff staff){
-    staffMap.put(staff.getUsername(),staff);
+  public void addLoginCredentials(User user){
+    userMap.put(user.getUsername(), user);
   }
 
   @Override
-  public Map<String,Staff> validateLogin(){
-    return staffMap;
+  public Map<String,User> validateLogin(){
+    return userMap;
   }
 
 }

@@ -15,7 +15,7 @@ public class Appointment{
     this.patient = patient;
     this.doctor = doctor;
     this.date = LocalDate.now();
-    this.token = generateToken(doctor.getDoctorId(), date, appointmentCount);
+    this.token = generateToken(doctor.getId(), date, appointmentCount);
     this.time = generateTimeSlot(appointmentCount);
   }
 

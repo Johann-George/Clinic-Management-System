@@ -46,10 +46,10 @@ public class BillServiceImpl implements IBillService{
   }
 
   @Override
-  public void generatePatientBillingHistory(String patientId){
+  public void generatePatientBillingHistory(String patientName){
 
     for(Bill bill : billRepo.getAllBills()){
-      if(bill.getPatientId().equals(patientId)){
+      if(bill.getPatientName().equals(patientName)){
         System.out.println("Billed Amount:"+bill.getTotalAmount());
       }
     }

@@ -14,22 +14,22 @@ public class AppointmentRepoImpl implements IAppointmentRepo{
 
   @Override
   public void savePatient(Patient patient){
-    patientMap.put(patient.getPatientId(), patient);
+    patientMap.put(patient.getPatientName(), patient);
   }
 
   @Override
   public void saveDoctor(Doctor doctor){
-    doctorMap.put(doctor.getDoctorId(), doctor);
+    doctorMap.put(doctor.getName(), doctor);
   }
 
   @Override
-  public Patient getPatientById(String patientId){
-    return patientMap.get(patientId);
+  public Patient getPatientByName(String patientName){
+    return patientMap.get(patientName);
   }
 
   @Override
-  public Doctor getDoctorById(String doctorId){
-    return doctorMap.get(doctorId);
+  public Doctor getDoctorByName(String doctorName){
+    return doctorMap.get(doctorName);
   }
 
 }

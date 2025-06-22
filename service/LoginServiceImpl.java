@@ -1,6 +1,7 @@
 package service;
 
 import models.Staff;
+import models.User;
 import repo.ILoginRepo;
 import repo.LoginRepoImpl;
 import java.util.Map;
@@ -14,20 +15,20 @@ public class LoginServiceImpl implements ILoginService{
   }
 
   @Override
-  public void addLoginCredentials(Staff staff){
-    loginRepo.addLoginCredentials(staff);
+  public void addLoginCredentials(User user){
+    loginRepo.addLoginCredentials(user);
   }
 
   @Override
-  public Staff validateLogin(String username, String password){
+  public User validateLogin(String username, String password){
     if(loginRepo.validateLogin().isEmpty()){
-      System.out.println("List is empty");
+      System.out.println("No Staff has been added!");
     }
-    for(Map.Entry<String,Staff> validate: loginRepo.validateLogin().entrySet()){
+    for(Map.Entry<String, User> validate: loginRepo.validateLogin().entrySet()){
       if(username.equals(validate.getKey())){
-        Staff staff = validate.getValue();
-        if(staff.getPassword().equals(password)){
-          return staff;
+        User user = validate.getValue();
+        if(user.getPassword().equals(password)){
+          return user;
         }
       }
     }

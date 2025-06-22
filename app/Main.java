@@ -14,6 +14,7 @@ import service.ConsultationServiceImpl;
 import service.IPatientService;
 import service.PatientServiceImpl;
 import models.Staff;
+import models.User;
 
 //To compile use: javac -d bin Main.java
 //To run use: java -cp bin Main
@@ -39,7 +40,7 @@ public class Main{
     int attempt = 0;
     while(attempt!=3){
       if(AdminUserName.equals("admin") && AdminPassword.equals("root")){
-        AdminDashboard.runAdminPanel(sc, adminService, loginService);
+        AdminDashboard.runAdminPanel(sc, adminService, loginService, appointmentService);
         break;
       }
       else{
@@ -54,26 +55,26 @@ public class Main{
     //Staff Login and Dashboard
     while(true){
       
-      System.out.println("=====Staff Login=====");
       sc.nextLine();
+      System.out.println("=====Staff Login=====");
       System.out.println("Enter Username:");
       String username = sc.nextLine();
       System.out.println("Enter Password:");
       String password = sc.nextLine();
-      Staff staff = loginService.validateLogin(username,password);
-      switch (staff.getRole()) {
+      User user = loginService.validateLogin(username,password);
+      switch (user.getRole()) {
 
         case "Doctor":
           DoctorDashboard.runDoctorPanel(sc, consultationService);
           break;
 
         case "Receptionist":
-          ReceptionistDashboard.runReceptionistPanel(sc, appointmentService, billService);
+          ReceptionistDashboard.runReceptionistPanel(sc, appointmentService, billService, loginService);
           break;
 
         case "Pharmacist":
           System.out.println("Pharmacist dashboard coming soon..");
-          break; 
+          break;
 
         case "Lab Technician":
           System.out.println("Lab Technician dashboard coming soon..");

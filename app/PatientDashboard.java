@@ -14,30 +14,35 @@ public class PatientDashboard{
   
   public static void runPatientPanel(Scanner sc, IAppointmentService appointmentService, IPatientService patientService, IBillService billService){
   
-    System.out.println("1.Book Appointment\n2.View prescription\n3.View Lab Reports\n4.Billing History");
-    System.out.println("Enter choice:");
-    int choice = sc.nextInt();
+    while(true){
+      System.out.println("1.Book Appointment\n2.View prescription\n3.View Lab Reports\n4.Billing History\n5.Exit");
+      System.out.println("Enter choice:");
+      int choice = sc.nextInt();
 
-    switch (choice) {
-      case 1:
-        bookAppointment(sc, appointmentService);
-        break;
+      switch (choice) {
+        case 1:
+          bookAppointment(sc, appointmentService);
+          break;
 
-      case 2:
-        viewPrescription(sc, patientService);
-        break;
+        case 2:
+          viewPrescription(sc, patientService);
+          break;
 
-      case 3:
-        //viewLabReports();
-        System.out.println("View Lab reports coming soon");
-        break;
+        case 3:
+          //viewLabReports();
+          System.out.println("View Lab reports coming soon");
+          break;
 
-      case 4:
-        billingHistory(sc, billService);
-        break;
-    
-      default:
-        break;
+        case 4:
+          billingHistory(sc, billService);
+          break;
+
+        case 5:
+          return;
+      
+        default:
+          break;
+      }
     }
 
   }
@@ -46,9 +51,9 @@ public class PatientDashboard{
 
     System.out.println("Enter the Patient Username:");
     String patientName= sc.nextLine();
-    System.out.println("Enter the Doctor ID:");
-    String doctorId = sc.nextLine();
-    appointmentService.appointmentScheduling(patientName, doctorId);
+    System.out.println("Enter the Doctor Username:");
+    String doctorName = sc.nextLine();
+    appointmentService.appointmentScheduling(patientName, doctorName);
 
   }
 
@@ -61,7 +66,6 @@ public class PatientDashboard{
     System.out.println("Enter the consultation Date:");
     String dt = sc.nextLine();
     LocalDate date = LocalDate.parse(dt);
-    System.out.println("The prescriptions in sorted by Date:");
     for(Consultation c : patientService.viewPrescription(patientName)){
       if(c.getConsultationDate().equals(date)){
         medicine.addAll(c.getAllMedicines());

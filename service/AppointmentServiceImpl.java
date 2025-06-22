@@ -16,10 +16,10 @@ public class AppointmentServiceImpl implements IAppointmentService{
   }
 
   @Override
-  public void appointmentScheduling(String patientId, String doctorId){
+  public void appointmentScheduling(String patientName, String doctorName){
 
-    Patient patient = appointmentRepo.getPatientById(patientId);
-    Doctor doctor = appointmentRepo.getDoctorById(doctorId);
+    Patient patient = appointmentRepo.getPatientByName(patientName);
+    Doctor doctor = appointmentRepo.getDoctorByName(doctorName);
     Appointment a = new Appointment(patient, doctor, appointmentCount++);
     System.out.println("Your Token No:"+a.getTokenNo());
     System.out.println("Your Appointment Time:"+a.getAppointmentTime());
@@ -28,6 +28,10 @@ public class AppointmentServiceImpl implements IAppointmentService{
 
   public void registerPatient(Patient patient){
     appointmentRepo.savePatient(patient);
+  }
+
+  public void registerDoctor(Doctor doctor){
+    appointmentRepo.saveDoctor(doctor);
   }
 
 }

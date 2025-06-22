@@ -1,6 +1,7 @@
 package models;
 
 import service.IDGenerator;
+import service.RoleGenerator;
 
 public abstract class Staff{
 
@@ -9,16 +10,16 @@ public abstract class Staff{
   protected String dob;
   protected String username;
   protected String password;
-  protected Role role;
+  protected String role;
 
-  public Staff(String id, String name, String dob, String username, String password, Role role){
+  public Staff(String id, String name, String dob, String username, String password, Integer roleNo){
   
     this.id = IDGenerator.generateID(id);
     this.name = name;
     this.dob = dob;
     this.username = username;
     this.password = password;
-    this.role = role;
+    this.role = RoleGenerator.getRole(roleNo);
 
   }
 
@@ -43,7 +44,7 @@ public abstract class Staff{
   }
 
   public String getRole(){
-    return this.role.roleName;
+    return this.role;
   }
 
 }

@@ -12,30 +12,32 @@ public class DoctorDashboard{
 
   public static void runDoctorPanel(Scanner sc, IConsultationService consultationService){
 
-    System.out.println("1.Conduct Consultation\n2.View Patient History\n3.Exit");
-    System.out.println("Enter choice:");
-    int choice = sc.nextInt();
-    switch (choice) {
-      case 1:
-        Consultation c = conductConsultation(sc,consultationService);
-        prescribeLabTest(c,sc,consultationService);
-        prescribeMedicine(c,sc,consultationService);
-        break;
+    while(true){
+      System.out.println("1.Conduct Consultation\n2.View Patient History\n3.Exit");
+      System.out.println("Enter choice:");
+      int choice = sc.nextInt();
+      switch (choice) {
+        case 1:
+          Consultation c = conductConsultation(sc,consultationService);
+          prescribeLabTest(c,sc,consultationService);
+          prescribeMedicine(c,sc,consultationService);
+          break;
 
-      case 2:
-        System.out.println("Enter the patient Username:");
-        String patientName = sc.nextLine();
-        for(Consultation c1: consultationService.getPatientHistory(patientName)){
-          System.out.println("Consultation ID:"+c1.getConsultationId()+"Diagnosis Details:"+c1.getDiagnosis()+"Consultation Date:"+c1.getConsultationDate()); 
-        }
-        break;
+        case 2:
+          System.out.println("Enter the patient Username:");
+          String patientName = sc.nextLine();
+          for(Consultation c1: consultationService.getPatientHistory(patientName)){
+            System.out.println("Consultation ID:"+c1.getConsultationId()+"Diagnosis Details:"+c1.getDiagnosis()+"Consultation Date:"+c1.getConsultationDate()); 
+          }
+          break;
 
-      case 3:
-        return;
+        case 3:
+          return;
 
-      default:
-        System.out.println("Enter a valid choice");
-        break;
+        default:
+          System.out.println("Enter a valid choice");
+          break;
+      }
     }
 
   }

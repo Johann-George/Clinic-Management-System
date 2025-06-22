@@ -22,8 +22,8 @@ public class AdminServiceImpl implements IAdminService{
   }
 
   @Override
-  public void deleteStaff(String id){
-    Staff staff = adminRepo.getStaffById(id);
+  public void deleteStaff(String name){
+    Staff staff = adminRepo.getStaffByName(name);
     adminRepo.removeStaff(staff);
   }
 

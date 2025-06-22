@@ -7,7 +7,7 @@ public interface IAppointmentRepo{
 
   void savePatient(Patient patient);
   void saveDoctor(Doctor doctor);
-  Patient getPatientById(String patientId);
-  Doctor getDoctorById(String doctorId);
+  Patient getPatientByName(String patientName);
+  Doctor getDoctorByName(String doctorName);
 
 }

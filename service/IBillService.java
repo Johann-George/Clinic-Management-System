@@ -2,8 +2,8 @@ package service;
 
 public interface IBillService{
 
-  void consultationBilling(String patientId, String doctorId);
+  void consultationBilling(String patientName, String doctorName);
   void generateDailyCollectionReport();
-  void generatePatientBillingHistory(String patientId);
+  void generatePatientBillingHistory(String patientName);
 
 }

@@ -5,50 +5,52 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import models.Patient;
+import models.User;
 import models.Appointment;
 import service.IAppointmentService;
 import service.IBillService;
+import service.ILoginService;
 
 public class ReceptionistDashboard{
 
-  public static void runReceptionistPanel(Scanner sc, IAppointmentService appointmentSerivce, IBillService billService){
+  public static void runReceptionistPanel(Scanner sc, IAppointmentService appointmentSerivce, IBillService billService, ILoginService loginService){
 
-    System.out.println("1.Patient Registration\n2.Appointment Scheduling\n3.Consultation Billing\n4.Daily Collection Reports\n5.Exit");
-    System.out.println("Enter choice:");
-    int choice = sc.nextInt();
+    while(true){
+      System.out.println("1.Patient Registration\n2.Appointment Scheduling\n3.Consultation Billing\n4.Daily Collection Reports\n5.Exit");
+      System.out.println("Enter choice:");
+      int choice = sc.nextInt();
 
-    switch (choice) {
-      case 1:
-        patientRegistration(sc, appointmentSerivce);   
-        break;
+      switch (choice) {
+        case 1:
+          patientRegistration(sc, appointmentSerivce, loginService);   
+          break;
 
-      case 2:
-        appointmentScheduling(sc, appointmentSerivce);
-        break;
+        case 2:
+          appointmentScheduling(sc, appointmentSerivce);
+          break;
 
-      case 3:
-        consultationBilling(sc, billService);
-        break;
+        case 3:
+          consultationBilling(sc, billService);
+          break;
 
-      case 4:
-        generateCollectionReports(billService);
-        break;
+        case 4:
+          generateCollectionReports(billService);
+          break;
 
-      case 5:
-        return;
+        case 5:
+          return;
 
-      default:
-        System.out.println("Enter a valid input");
-        break;
+        default:
+          System.out.println("Enter a valid input");
+          break;
+      }
     }
 
   }
 
-  public static void patientRegistration(Scanner sc, IAppointmentService appointmentService){
+  public static void patientRegistration(Scanner sc, IAppointmentService appointmentService, ILoginService loginService){
 
     sc.nextLine();
-    System.out.println("Enter the Patient ID:");
-    String patientId = sc.nextLine();
     System.out.println("Enter the Patient Name:");
     String patientName = sc.nextLine();
     System.out.println("Enter the Contact No:");
@@ -57,11 +59,13 @@ public class ReceptionistDashboard{
     String address = sc.nextLine();
     System.out.println("Enter DOB(dd/mm/yy):");
     String DoB = sc.nextLine();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     LocalDate dob = LocalDate.parse(DoB, formatter);
     System.out.println("Enter Gender:");
     String gender = sc.nextLine();
     Patient p = new Patient(patientName, contactNo, address, dob, gender);
+    User user = new User(patientName, DoB, 5, p);
+    loginService.addLoginCredentials(user);
     appointmentService.registerPatient(p);
     System.out.println("Patient is registered successfully");
 
@@ -69,11 +73,12 @@ public class ReceptionistDashboard{
 
   public static void appointmentScheduling(Scanner sc, IAppointmentService appointmentService){
 
+    sc.nextLine();
     System.out.println("Enter the Patient Username:");
     String patientName = sc.nextLine();
-    System.out.println("Enter the Doctor ID:");
-    String doctorId = sc.nextLine();
-    appointmentService.appointmentScheduling(patientName, doctorId);
+    System.out.println("Enter the Doctor Name:");
+    String doctorName = sc.nextLine();
+    appointmentService.appointmentScheduling(patientName, doctorName);
 
   }
 
@@ -81,9 +86,9 @@ public class ReceptionistDashboard{
 
     System.out.println("Enter the Patient Username:");
     String patientName = sc.nextLine();
-    System.out.println("Enter the Doctor ID:");
-    String doctorId = sc.nextLine();
-    billService.consultationBilling(patientName, doctorId);
+    System.out.println("Enter the Doctor Username:");
+    String doctorName = sc.nextLine();
+    billService.consultationBilling(patientName, doctorName);
 
   }
 

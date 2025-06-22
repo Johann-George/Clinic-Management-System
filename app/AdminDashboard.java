@@ -1,7 +1,7 @@
 package app;
 
 import java.util.Scanner;
-import models.Role;
+import models.User;
 import models.Staff;
 import models.Doctor;
 import models.Receptionist;
@@ -11,10 +11,11 @@ import service.AdminServiceImpl;
 import service.IAdminService;
 import service.ILoginService;
 import service.LoginServiceImpl;
+import service.IAppointmentService;
 
 public class AdminDashboard{
 
-  public static void runAdminPanel(Scanner sc,IAdminService adminService, ILoginService loginService){
+  public static void runAdminPanel(Scanner sc,IAdminService adminService, ILoginService loginService, IAppointmentService appointmentService){
 
     while(true){
     
@@ -23,7 +24,7 @@ public class AdminDashboard{
       int choice = sc.nextInt();
       switch (choice) {
         case 1:
-          addStaff(sc,adminService,loginService);
+          addStaff(sc,adminService,loginService, appointmentService);
           break;
 
         case 2:
@@ -47,14 +48,14 @@ public class AdminDashboard{
     }
   }
 
-  public static void addStaff(Scanner sc,IAdminService adminService,ILoginService loginService){
+  public static void addStaff(Scanner sc,IAdminService adminService,ILoginService loginService, IAppointmentService appointmentService){
 
     System.out.println("===========================");
     System.out.println("1.Doctor\n2.Receptionist\n3.Pharmacist\n4.Lab Technician");
     System.out.println("Enter choice:");
     int choice = sc.nextInt();
     Staff staff = null;
-    Role role = null;
+    User user = null;
     sc.nextLine();
     System.out.println("Enter name:");
     String name = sc.nextLine();
@@ -65,27 +66,31 @@ public class AdminDashboard{
       case 1:
         System.out.println("Enter specialization:");
         String spec = sc.nextLine();
-        role = new Role(1,"Doctor");
-        staff = new Doctor(name,spec,dob,name,dob,role);
-        loginService.addLoginCredentials(staff);
+        staff = new Doctor(name,spec,dob,name,dob,choice);
+        user = new User(name, dob, choice, staff);
+        loginService.addLoginCredentials(user);
+        appointmentService.registerStaff(staff);
         break;
 
       case 2:
-        role = new Role(2,"Receptionist");
-        staff = new Receptionist(name,dob,name,dob,role);
-        loginService.addLoginCredentials(staff);
+        staff = new Receptionist(name,dob,name,dob,choice);
+        user = new User(name, dob, choice, staff);
+        loginService.addLoginCredentials(user);
+        adminService.registerStaff(staff);
         break;
 
       case 3:
-        role = new Role(3,"Pharmacist");
-        staff = new Pharmacist(name,dob,name,dob,role);
-        loginService.addLoginCredentials(staff);
+        staff = new Pharmacist(name,dob,name,dob,choice);
+        user = new User(name, dob, choice, staff);
+        adminService.registerStaff(staff);
+        loginService.addLoginCredentials(user);
         break;
 
       case 4:
-        role = new Role(4,"Lab Technician");
-        staff = new LabTechnician(name,dob,name,dob,role);
-        loginService.addLoginCredentials(staff);
+        staff = new LabTechnician(name,dob,name,dob,choice);
+        user = new User(name, dob, choice, staff);
+        loginService.addLoginCredentials(user);
+        adminService.registerStaff(staff);
         break;
     
       default:
@@ -99,9 +104,9 @@ public class AdminDashboard{
 
   public static void deleteStaff(Scanner sc,IAdminService adminService){
 
-    System.out.println("Enter the ID:");
-    String id = sc.nextLine();
-    adminService.deleteStaff(id);
+    System.out.println("Enter the Name:");
+    String name = sc.nextLine();
+    adminService.deleteStaff(name);
     System.out.println("Staff is removed successfully!");
 
   } 
