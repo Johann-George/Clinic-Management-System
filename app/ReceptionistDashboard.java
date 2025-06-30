@@ -84,6 +84,7 @@ public class ReceptionistDashboard{
 
   public static void consultationBilling(Scanner sc, IBillService billService){
 
+    sc.nextLine();
     System.out.println("Enter the Patient Username:");
     String patientName = sc.nextLine();
     System.out.println("Enter the Doctor Username:");

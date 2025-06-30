@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import repo.IAppointmentRepo;
+import models.Staff;
 import models.Patient;
 import models.Doctor;
 
 public class AppointmentRepoImpl implements IAppointmentRepo{
 
   private Map<String, Patient> patientMap = new HashMap<>();
-  private Map<String, Doctor> doctorMap = new HashMap<>();
+  private Map<String, Staff> doctorMap = new HashMap<>();
 
   @Override
   public void savePatient(Patient patient){
@@ -18,8 +19,8 @@ public class AppointmentRepoImpl implements IAppointmentRepo{
   }
 
   @Override
-  public void saveDoctor(Doctor doctor){
-    doctorMap.put(doctor.getName(), doctor);
+  public void saveDoctor(Staff staff){
+    doctorMap.put(staff.getName(), staff);
   }
 
   @Override
@@ -28,7 +29,7 @@ public class AppointmentRepoImpl implements IAppointmentRepo{
   }
 
   @Override
-  public Doctor getDoctorByName(String doctorName){
+  public Staff getDoctorByName(String doctorName){
     return doctorMap.get(doctorName);
   }
 

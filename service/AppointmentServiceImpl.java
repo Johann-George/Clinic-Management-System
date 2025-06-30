@@ -1,5 +1,6 @@
 package service;
 
+import models.Staff;
 import models.Patient;
 import models.Doctor;
 import models.Appointment;
@@ -19,7 +20,7 @@ public class AppointmentServiceImpl implements IAppointmentService{
   public void appointmentScheduling(String patientName, String doctorName){
 
     Patient patient = appointmentRepo.getPatientByName(patientName);
-    Doctor doctor = appointmentRepo.getDoctorByName(doctorName);
+    Doctor doctor = (Doctor)appointmentRepo.getDoctorByName(doctorName);
     Appointment a = new Appointment(patient, doctor, appointmentCount++);
     System.out.println("Your Token No:"+a.getTokenNo());
     System.out.println("Your Appointment Time:"+a.getAppointmentTime());
@@ -30,8 +31,8 @@ public class AppointmentServiceImpl implements IAppointmentService{
     appointmentRepo.savePatient(patient);
   }
 
-  public void registerDoctor(Doctor doctor){
-    appointmentRepo.saveDoctor(doctor);
+  public void registerDoctor(Staff staff){
+    appointmentRepo.saveDoctor(staff);
   }
 
 }

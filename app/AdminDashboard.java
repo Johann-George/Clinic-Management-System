@@ -69,20 +69,18 @@ public class AdminDashboard{
         staff = new Doctor(name,spec,dob,name,dob,choice);
         user = new User(name, dob, choice, staff);
         loginService.addLoginCredentials(user);
-        appointmentService.registerStaff(staff);
+        appointmentService.registerDoctor(staff);
         break;
 
       case 2:
         staff = new Receptionist(name,dob,name,dob,choice);
         user = new User(name, dob, choice, staff);
         loginService.addLoginCredentials(user);
-        adminService.registerStaff(staff);
         break;
 
       case 3:
         staff = new Pharmacist(name,dob,name,dob,choice);
         user = new User(name, dob, choice, staff);
-        adminService.registerStaff(staff);
         loginService.addLoginCredentials(user);
         break;
 
@@ -90,7 +88,6 @@ public class AdminDashboard{
         staff = new LabTechnician(name,dob,name,dob,choice);
         user = new User(name, dob, choice, staff);
         loginService.addLoginCredentials(user);
-        adminService.registerStaff(staff);
         break;
     
       default:

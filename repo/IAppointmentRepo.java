@@ -1,13 +1,13 @@
 package repo;
 
 import models.Patient;
-import models.Doctor;
+import models.Staff;
 
 public interface IAppointmentRepo{
 
   void savePatient(Patient patient);
-  void saveDoctor(Doctor doctor);
+  void saveDoctor(Staff staff);
   Patient getPatientByName(String patientName);
-  Doctor getDoctorByName(String doctorName);
+  Staff getDoctorByName(String doctorName);
 
 }

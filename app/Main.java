@@ -16,8 +16,8 @@ import service.PatientServiceImpl;
 import models.Staff;
 import models.User;
 
-//To compile use: javac -d bin Main.java
-//To run use: java -cp bin Main
+//To compile use: javac -d bin app/Main.java
+//To run use: java -cp bin app/Main
 public class Main{
 
   private static Scanner sc = new Scanner(System.in);
