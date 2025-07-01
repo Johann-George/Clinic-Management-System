@@ -69,7 +69,7 @@ public class Main{
           break;
 
         case "Receptionist":
-          ReceptionistDashboard.runReceptionistPanel(sc, appointmentService, billService, loginService);
+          ReceptionistDashboard.runReceptionistPanel(sc, appointmentService, billService, loginService, patientService);
           break;
 
         case "Pharmacist":

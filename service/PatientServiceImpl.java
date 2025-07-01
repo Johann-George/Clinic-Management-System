@@ -24,4 +24,9 @@ public class PatientServiceImpl implements IPatientService{
 
   }
 
+  @Override
+  public void registerPatient(Patient patient){
+    patientRepo.savePatient(patient);
+  }
+
 }

@@ -3,6 +3,8 @@ package service;
 import models.Consultation;
 import models.Patient;
 import repo.ConsultationRepoImpl;
+import repo.AppointmentRepoImpl;
+import repo.IAppointmentRepo;
 import repo.IConsultationRepo;
 import repo.IPatientRepo;
 import repo.PatientRepoImpl;

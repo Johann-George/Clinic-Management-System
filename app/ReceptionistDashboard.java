@@ -10,10 +10,11 @@ import models.Appointment;
 import service.IAppointmentService;
 import service.IBillService;
 import service.ILoginService;
+import service.IPatientService;
 
 public class ReceptionistDashboard{
 
-  public static void runReceptionistPanel(Scanner sc, IAppointmentService appointmentSerivce, IBillService billService, ILoginService loginService){
+  public static void runReceptionistPanel(Scanner sc, IAppointmentService appointmentSerivce, IBillService billService, ILoginService loginService, IPatientService patientService){
 
     while(true){
       System.out.println("1.Patient Registration\n2.Appointment Scheduling\n3.Consultation Billing\n4.Daily Collection Reports\n5.Exit");
@@ -22,7 +23,7 @@ public class ReceptionistDashboard{
 
       switch (choice) {
         case 1:
-          patientRegistration(sc, appointmentSerivce, loginService);   
+          patientRegistration(sc, appointmentSerivce, loginService, patientService);   
           break;
 
         case 2:
@@ -48,7 +49,7 @@ public class ReceptionistDashboard{
 
   }
 
-  public static void patientRegistration(Scanner sc, IAppointmentService appointmentService, ILoginService loginService){
+  public static void patientRegistration(Scanner sc, IAppointmentService appointmentService, ILoginService loginService, IPatientService patientService){
 
     sc.nextLine();
     System.out.println("Enter the Patient Name:");
@@ -67,6 +68,7 @@ public class ReceptionistDashboard{
     User user = new User(patientName, DoB, 5, p);
     loginService.addLoginCredentials(user);
     appointmentService.registerPatient(p);
+    patientService.registerPatient(p);
     System.out.println("Patient is registered successfully");
 
   }
