@@ -3,15 +3,27 @@ package repo;
 import java.util.HashMap;
 import java.util.Map;
 
-import repo.IAppointmentRepo;
 import models.Staff;
 import models.Patient;
-import models.Doctor;
 
 public class AppointmentRepoImpl implements IAppointmentRepo{
 
-  private Map<String, Patient> patientMap = new HashMap<>();
-  private Map<String, Staff> doctorMap = new HashMap<>();
+  private static AppointmentRepoImpl instance;
+
+  private Map<String, Patient> patientMap; 
+  private Map<String, Staff> doctorMap; 
+
+  private AppointmentRepoImpl() {
+    patientMap = new HashMap<>();
+    doctorMap = new HashMap<>();
+  }
+
+  public static AppointmentRepoImpl getInstance(){
+    if(instance == null){
+      instance = new AppointmentRepoImpl();
+    }
+    return instance;
+  }
 
   @Override
   public void savePatient(Patient patient){
@@ -25,6 +37,7 @@ public class AppointmentRepoImpl implements IAppointmentRepo{
 
   @Override
   public Patient getPatientByName(String patientName){
+    System.out.println("Patient = "+patientMap.get(patientName));
     return patientMap.get(patientName);
   }
 

@@ -14,16 +14,16 @@ import java.util.List;
 public class ConsultationServiceImpl implements IConsultationService{
 
   private IConsultationRepo consultationRepo;
-  private IPatientRepo patientRepo;
+  private IAppointmentRepo appointmentRepo;
 
   public ConsultationServiceImpl(){
-    this.consultationRepo = new ConsultationRepoImpl();
-    this.patientRepo = new PatientRepoImpl();
+    this.consultationRepo = ConsultationRepoImpl.getInstance();
+    this.appointmentRepo= AppointmentRepoImpl.getInstance();
   }
 
   @Override
   public Consultation conductConsultation(String patientName, String diagnosis){
-    Patient patient = patientRepo.getPatientByName(patientName);
+    Patient patient = appointmentRepo.getPatientByName(patientName);
     Consultation consultation = new Consultation(patientName, diagnosis);
     patient.addConsultation(consultation);
     consultationRepo.saveConsultation(consultation);
@@ -32,7 +32,7 @@ public class ConsultationServiceImpl implements IConsultationService{
 
   @Override
   public List<Consultation> getPatientHistory(String patientName){
-    Patient patient = patientRepo.getPatientByName(patientName);
+    Patient patient = appointmentRepo.getPatientByName(patientName);
     return patient.getConsultation();
   }
 

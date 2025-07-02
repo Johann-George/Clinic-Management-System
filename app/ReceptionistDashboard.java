@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import models.Patient;
 import models.User;
-import models.Appointment;
 import service.IAppointmentService;
 import service.IBillService;
 import service.ILoginService;

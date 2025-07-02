@@ -10,8 +10,6 @@ import models.Bill;
 import models.Consultation;
 import models.Patient;
 
-import java.util.Scanner;
-
 public class BillServiceImpl implements IBillService{
 
   private IConsultationRepo consultationRepo;
@@ -19,9 +17,9 @@ public class BillServiceImpl implements IBillService{
   private IBillRepo billRepo;
 
   public BillServiceImpl(){
-    this.consultationRepo = new ConsultationRepoImpl();
-    this.patientRepo = new PatientRepoImpl();
-    this.billRepo = new BillRepoImpl();
+    this.consultationRepo = ConsultationRepoImpl.getInstance();
+    this.patientRepo = PatientRepoImpl.getInstance();
+    this.billRepo = BillRepoImpl.getInstance();
   }
 
   @Override

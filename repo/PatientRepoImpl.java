@@ -9,7 +9,19 @@ import java.util.List;
 
 public class PatientRepoImpl implements IPatientRepo{
 
-  private Map<String , Patient> personMap = new HashMap<>();
+  private static PatientRepoImpl instance;
+  private Map<String , Patient> personMap; 
+
+  private PatientRepoImpl() {
+    personMap = new HashMap<>();
+  }
+
+  public static PatientRepoImpl getInstance(){
+    if(instance == null){
+      instance = new PatientRepoImpl();
+    }
+    return instance;
+  }
 
   @Override
   public void savePatient(Patient patient){

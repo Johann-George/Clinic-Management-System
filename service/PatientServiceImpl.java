@@ -5,7 +5,6 @@ import repo.PatientRepoImpl;
 import models.Patient;
 import models.Consultation;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class PatientServiceImpl implements IPatientService{
@@ -13,7 +12,7 @@ public class PatientServiceImpl implements IPatientService{
   private IPatientRepo patientRepo;
 
   public PatientServiceImpl(){
-    this.patientRepo = new PatientRepoImpl();
+    this.patientRepo = PatientRepoImpl.getInstance();
   }
 
   @Override

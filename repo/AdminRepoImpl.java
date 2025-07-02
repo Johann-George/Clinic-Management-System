@@ -6,7 +6,19 @@ import models.Staff;
 
 public class AdminRepoImpl implements IAdminRepo{
 
-  private List<Staff> staffList= new ArrayList<>();
+  private static AdminRepoImpl instance;
+  private List<Staff> staffList;
+
+  private AdminRepoImpl() {
+    staffList = new ArrayList<>();
+  }
+
+  public static AdminRepoImpl getInstance(){
+    if(instance == null){
+      instance = new AdminRepoImpl();
+    }
+    return instance;
+  }
 
   @Override
   public void addStaff(Staff staff){

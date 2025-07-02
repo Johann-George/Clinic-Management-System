@@ -11,7 +11,7 @@ public class LoginServiceImpl implements ILoginService{
   private ILoginRepo loginRepo;
 
   public LoginServiceImpl(){
-    this.loginRepo = new LoginRepoImpl();
+    this.loginRepo = LoginRepoImpl.getInstance();
   }
 
   @Override

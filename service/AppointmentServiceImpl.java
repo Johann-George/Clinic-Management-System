@@ -13,7 +13,7 @@ public class AppointmentServiceImpl implements IAppointmentService{
   private int appointmentCount = 0;
 
   public AppointmentServiceImpl(){
-    this.appointmentRepo = new AppointmentRepoImpl();
+    appointmentRepo = AppointmentRepoImpl.getInstance();
   }
 
   @Override
@@ -24,6 +24,7 @@ public class AppointmentServiceImpl implements IAppointmentService{
     Appointment a = new Appointment(patient, doctor, appointmentCount++);
     System.out.println("Your Token No:"+a.getTokenNo());
     System.out.println("Your Appointment Time:"+a.getAppointmentTime());
+    System.out.println("============================");
 
   }
 

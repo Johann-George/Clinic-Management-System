@@ -6,7 +6,6 @@ import java.util.List;
 
 import models.Consultation;
 import service.IConsultationService;
-import service.ConsultationServiceImpl;
 
 public class DoctorDashboard{
 
@@ -24,6 +23,8 @@ public class DoctorDashboard{
           break;
 
         case 2:
+          sc.nextLine(); // Consume the newline character left by nextInt()
+          System.out.println("=====Patient History=====");
           System.out.println("Enter the patient Username:");
           String patientName = sc.nextLine();
           for(Consultation c1: consultationService.getPatientHistory(patientName)){
@@ -62,6 +63,8 @@ public class DoctorDashboard{
     System.out.println("Enter the number of Lab Tests:");
     int labTestNo = sc.nextInt();
     List<String> labTest = new ArrayList<>();
+    sc.nextLine(); // Consume the newline character left by nextInt()
+    // Loop to enter the lab tests
     for(int i=0;i<labTestNo;i++){
       System.out.println("Enter the prescribed Lab Test:");
       labTest.add(sc.nextLine());
@@ -73,7 +76,7 @@ public class DoctorDashboard{
   // Medicines are prescribed by the doctor are entered and displayed here
   public static void prescribeMedicine(Consultation c, Scanner sc, IConsultationService consultationService){
 
-    System.out.println("Enter the prescribed Medicines:");
+    System.out.println("Enter the number of prescribed Medicines:");
     int medicineNo = sc.nextInt();
     List<String> medicine = new ArrayList<>();
     for(int i=0;i<medicineNo;i++){

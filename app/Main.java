@@ -1,6 +1,18 @@
 package app;
 
 import java.util.Scanner;
+import repo.IAdminRepo;
+import repo.ILoginRepo;
+import repo.IAppointmentRepo;
+import repo.IBillRepo;
+import repo.IConsultationRepo;
+import repo.IPatientRepo;
+import repo.LoginRepoImpl;
+import repo.PatientRepoImpl;
+import repo.AdminRepoImpl;
+import repo.AppointmentRepoImpl;
+import repo.BillRepoImpl;
+import repo.ConsultationRepoImpl;
 import service.ILoginService;
 import service.IConsultationService;
 import service.LoginServiceImpl;
@@ -13,7 +25,6 @@ import service.BillServiceImpl;
 import service.ConsultationServiceImpl;
 import service.IPatientService;
 import service.PatientServiceImpl;
-import models.Staff;
 import models.User;
 
 //To compile use: javac -d bin app/Main.java
@@ -24,6 +35,7 @@ public class Main{
 
   public void mainDashboard(){
 
+    // Initialize services
     IAdminService adminService = new AdminServiceImpl();
     ILoginService loginService = new LoginServiceImpl(); 
     IConsultationService consultationService = new ConsultationServiceImpl();
@@ -90,8 +102,6 @@ public class Main{
       }
 
     }
-
-
 
   }
 
