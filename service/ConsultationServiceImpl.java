@@ -22,11 +22,11 @@ public class ConsultationServiceImpl implements IConsultationService{
   }
 
   @Override
-  public Consultation conductConsultation(String patientName, String diagnosis){
+  public Consultation conductConsultation(String tokenNo, String patientName, String diagnosis){
     Patient patient = appointmentRepo.getPatientByName(patientName);
     Consultation consultation = new Consultation(patientName, diagnosis);
     patient.addConsultation(consultation);
-    consultationRepo.saveConsultation(consultation);
+    consultationRepo.saveConsultation(tokenNo, consultation);
     return consultation;
   }
 
@@ -37,14 +37,14 @@ public class ConsultationServiceImpl implements IConsultationService{
   }
 
   @Override
-  public void addMedicine(String consultationId, List<String> medicine){
-    Consultation consultation = consultationRepo.getConsultationById(consultationId); 
+  public void addMedicine(String tokenNo, List<String> medicine){
+    Consultation consultation = consultationRepo.getConsultationByTokenNo(tokenNo); 
     consultation.addMedicine(medicine);
   }
 
   @Override
-  public void addLabTest(String consultationId, List<String> labTest){
-    Consultation consultation = consultationRepo.getConsultationById(consultationId); 
+  public void addLabTest(String tokenNo, List<String> labTest){
+    Consultation consultation = consultationRepo.getConsultationByTokenNo(tokenNo); 
     consultation.addLabTest(labTest);
   }
 

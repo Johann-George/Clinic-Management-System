@@ -46,13 +46,15 @@ public class DoctorDashboard{
   // All consultations details are entered here
   public static Consultation conductConsultation(Scanner sc, IConsultationService consultationService){
 
+    System.out.println("Enter Token No:");
+    String tokenNo = sc.nextLine();
     System.out.println("Enter patient details:");
     sc.nextLine();
     System.out.println("Enter the Patient Username:");
     String patientName = sc.nextLine();
     System.out.println("Enter the diagnosis details:");
     String diagnosisDetails = sc.nextLine();
-    Consultation consultation = consultationService.conductConsultation(patientName, diagnosisDetails);
+    Consultation consultation = consultationService.conductConsultation(tokenNo, patientName, diagnosisDetails);
     return consultation;
 
   }
@@ -60,6 +62,8 @@ public class DoctorDashboard{
   // Lab tests prescribed by the doctor are entered and displayed here
   public static void prescribeLabTest(Consultation c, Scanner sc, IConsultationService consultationService){
     
+    System.out.println("Enter the Patient Token No:");
+    String tokenNo = sc.nextLine();
     System.out.println("Enter the number of Lab Tests:");
     int labTestNo = sc.nextInt();
     List<String> labTest = new ArrayList<>();
@@ -69,13 +73,15 @@ public class DoctorDashboard{
       System.out.println("Enter the prescribed Lab Test:");
       labTest.add(sc.nextLine());
     }
-    consultationService.addLabTest(c.getConsultationId(), labTest);
+    consultationService.addLabTest(tokenNo, labTest);
 
   }
 
   // Medicines are prescribed by the doctor are entered and displayed here
   public static void prescribeMedicine(Consultation c, Scanner sc, IConsultationService consultationService){
 
+    System.out.println("Enter the Patient Token No:");
+    String tokenNo = sc.nextLine();
     System.out.println("Enter the number of prescribed Medicines:");
     int medicineNo = sc.nextInt();
     List<String> medicine = new ArrayList<>();
@@ -83,7 +89,7 @@ public class DoctorDashboard{
       System.out.println("Enter the prescribed Medicine:");
       medicine.add(sc.nextLine());
     }
-    consultationService.addMedicine(c.getConsultationId(), medicine);
+    consultationService.addMedicine(tokenNo, medicine);
 
   }
 

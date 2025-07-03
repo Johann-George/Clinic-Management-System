@@ -17,14 +17,12 @@ public class AppointmentServiceImpl implements IAppointmentService{
   }
 
   @Override
-  public void appointmentScheduling(String patientName, String doctorName){
+  public Appointment appointmentScheduling(String patientName, String doctorName){
 
     Patient patient = appointmentRepo.getPatientByName(patientName);
     Doctor doctor = (Doctor)appointmentRepo.getDoctorByName(doctorName);
     Appointment a = new Appointment(patient, doctor, appointmentCount++);
-    System.out.println("Your Token No:"+a.getTokenNo());
-    System.out.println("Your Appointment Time:"+a.getAppointmentTime());
-    System.out.println("============================");
+    return a;
 
   }
 

@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import models.Patient;
 import models.User;
+import models.Appointment;
 import service.IAppointmentService;
 import service.IBillService;
 import service.ILoginService;
@@ -79,7 +80,10 @@ public class ReceptionistDashboard{
     String patientName = sc.nextLine();
     System.out.println("Enter the Doctor Name:");
     String doctorName = sc.nextLine();
-    appointmentService.appointmentScheduling(patientName, doctorName);
+    Appointment a = appointmentService.appointmentScheduling(patientName, doctorName);
+    System.out.println("Your Token No:"+a.getTokenNo());
+    System.out.println("Your Appointment Time:"+a.getAppointmentTime());
+    System.out.println("============================");
 
   }
 

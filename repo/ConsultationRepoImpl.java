@@ -23,13 +23,23 @@ public class ConsultationRepoImpl implements IConsultationRepo{
   }
 
   @Override
-  public Consultation getConsultationById(String consultationId){
-    return consultationMap.get(consultationId);
+  public Consultation getConsultationById(String consultationId) {
+    for (Consultation consultation : consultationMap.values()) {
+      if (consultation.getConsultationId().equals(consultationId)) {
+        return consultation;
+      }
+    }
+    return null; // or throw an exception if not found
   }
 
   @Override
-  public void saveConsultation(Consultation consultation){
-    consultationMap.put(consultation.getConsultationId(), consultation);
+  public Consultation getConsultationByTokenNo(String tokenNo) {
+    return consultationMap.get(tokenNo);
+  }
+
+  @Override
+  public void saveConsultation(String tokenNo, Consultation consultation){
+    consultationMap.put(tokenNo, consultation);
   }
 
 }

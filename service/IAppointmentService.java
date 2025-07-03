@@ -2,10 +2,11 @@ package service;
 
 import models.Patient;
 import models.Staff;
+import models.Appointment;
 
 public interface IAppointmentService{
 
-  void appointmentScheduling(String patientName, String doctorName);
+  Appointment appointmentScheduling(String patientName, String doctorName);
   void registerPatient(Patient patient);
   void registerDoctor(Staff staff);
 
