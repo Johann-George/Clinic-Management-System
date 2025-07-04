@@ -46,6 +46,7 @@ public class DoctorDashboard{
   // All consultations details are entered here
   public static Consultation conductConsultation(Scanner sc, IConsultationService consultationService){
 
+    sc.nextLine();
     System.out.println("Enter Token No:");
     String tokenNo = sc.nextLine();
     System.out.println("Enter patient details:");
@@ -84,6 +85,7 @@ public class DoctorDashboard{
     String tokenNo = sc.nextLine();
     System.out.println("Enter the number of prescribed Medicines:");
     int medicineNo = sc.nextInt();
+    sc.nextLine();
     List<String> medicine = new ArrayList<>();
     for(int i=0;i<medicineNo;i++){
       System.out.println("Enter the prescribed Medicine:");

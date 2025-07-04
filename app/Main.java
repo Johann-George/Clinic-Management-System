@@ -85,10 +85,10 @@ public class Main{
           break;
 
         case "Pharmacist":
-          System.out.println("Pharmacist dashboard coming soon..");
+          PharmacistDashboard.runPharmacistPanel(sc,consultationService, billService);
           break;
 
-        case "Lab Technician":
+       case "Lab Technician":
           System.out.println("Lab Technician dashboard coming soon..");
           break;
 

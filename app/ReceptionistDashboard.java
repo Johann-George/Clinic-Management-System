@@ -31,7 +31,7 @@ public class ReceptionistDashboard{
           break;
 
         case 3:
-          consultationBilling(sc, billService);
+          System.out.println("The Consultation Fee is 500");
           break;
 
         case 4:
@@ -84,17 +84,6 @@ public class ReceptionistDashboard{
     System.out.println("Your Token No:"+a.getTokenNo());
     System.out.println("Your Appointment Time:"+a.getAppointmentTime());
     System.out.println("============================");
-
-  }
-
-  public static void consultationBilling(Scanner sc, IBillService billService){
-
-    sc.nextLine();
-    System.out.println("Enter the Patient Username:");
-    String patientName = sc.nextLine();
-    System.out.println("Enter the Doctor Username:");
-    String doctorName = sc.nextLine();
-    billService.consultationBilling(patientName, doctorName);
 
   }
 

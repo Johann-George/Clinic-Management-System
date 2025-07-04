@@ -48,4 +48,9 @@ public class ConsultationServiceImpl implements IConsultationService{
     consultation.addLabTest(labTest);
   }
 
+  @Override
+  public Consultation getConsultationByTokenNo(String tokenNo){
+    return consultationRepo.getConsultationByTokenNo(tokenNo);
+  }
+
 }
