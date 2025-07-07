@@ -37,7 +37,6 @@ public class AppointmentRepoImpl implements IAppointmentRepo{
 
   @Override
   public Patient getPatientByName(String patientName){
-    System.out.println("Patient = "+patientMap.get(patientName));
     return patientMap.get(patientName);
   }
 
