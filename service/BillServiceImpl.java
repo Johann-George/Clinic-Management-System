@@ -23,10 +23,10 @@ public class BillServiceImpl implements IBillService{
   }
 
   @Override
-  public void consultationBilling(String patientName, String consultationId){
+  public void consultationBilling(String patientName, String tokenNo){
     
     Patient patient = patientRepo.getPatientByName(patientName);
-    Consultation consultation = consultationRepo.getConsultationById(consultationId);
+    Consultation consultation = consultationRepo.getConsultationByTokenNo(tokenNo);
     Bill bill = new Bill(patient, consultation, consultation.getAllMedicines(), consultation.getAllLabTests());
     billRepo.saveBill(bill);
     System.out.println("The Total Amount:"+bill.calculateTotalAmount());

@@ -13,6 +13,7 @@ public class IDGenerator{
     counters.put("PHA", 0);
     counters.put("LAB", 0);
     counters.put("REC", 0);
+    counters.put("LT", 0);
   }
 
   public static String generateID(String roleCode){

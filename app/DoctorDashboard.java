@@ -17,9 +17,11 @@ public class DoctorDashboard{
       int choice = sc.nextInt();
       switch (choice) {
         case 1:
-          Consultation c = conductConsultation(sc,consultationService);
-          prescribeLabTest(c,sc,consultationService);
-          prescribeMedicine(c,sc,consultationService);
+          System.out.println("Enter Token No:");
+          String tokenNo = sc.nextLine();
+          Consultation c = conductConsultation(sc,consultationService, tokenNo);
+          prescribeLabTest(c, sc, consultationService, tokenNo);
+          prescribeMedicine(c, sc, consultationService, tokenNo);
           break;
 
         case 2:
@@ -44,11 +46,9 @@ public class DoctorDashboard{
   }
 
   // All consultations details are entered here
-  public static Consultation conductConsultation(Scanner sc, IConsultationService consultationService){
+  public static Consultation conductConsultation(Scanner sc, IConsultationService consultationService, String tokenNo){
 
     sc.nextLine();
-    System.out.println("Enter Token No:");
-    String tokenNo = sc.nextLine();
     System.out.println("Enter patient details:");
     sc.nextLine();
     System.out.println("Enter the Patient Username:");
@@ -61,10 +61,8 @@ public class DoctorDashboard{
   }
 
   // Lab tests prescribed by the doctor are entered and displayed here
-  public static void prescribeLabTest(Consultation c, Scanner sc, IConsultationService consultationService){
+  public static void prescribeLabTest(Consultation c, Scanner sc, IConsultationService consultationService, String tokenNo){
     
-    System.out.println("Enter the Patient Token No:");
-    String tokenNo = sc.nextLine();
     System.out.println("Enter the number of Lab Tests:");
     int labTestNo = sc.nextInt();
     List<String> labTest = new ArrayList<>();
@@ -79,10 +77,8 @@ public class DoctorDashboard{
   }
 
   // Medicines are prescribed by the doctor are entered and displayed here
-  public static void prescribeMedicine(Consultation c, Scanner sc, IConsultationService consultationService){
+  public static void prescribeMedicine(Consultation c, Scanner sc, IConsultationService consultationService, String tokenNo){
 
-    System.out.println("Enter the Patient Token No:");
-    String tokenNo = sc.nextLine();
     System.out.println("Enter the number of prescribed Medicines:");
     int medicineNo = sc.nextInt();
     sc.nextLine();

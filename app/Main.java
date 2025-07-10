@@ -25,6 +25,8 @@ import service.BillServiceImpl;
 import service.ConsultationServiceImpl;
 import service.IPatientService;
 import service.PatientServiceImpl;
+import service.ILabTestService;
+import service.LabTestServiceImpl;
 import models.User;
 
 //To compile use: javac -d bin app/Main.java
@@ -42,6 +44,7 @@ public class Main{
     IAppointmentService appointmentService = new AppointmentServiceImpl();
     IBillService billService = new BillServiceImpl();
     IPatientService patientService = new PatientServiceImpl();
+    ILabTestService labTestService = new LabTestServiceImpl();
 
     //Admin Login and dashboard
     System.out.println("======Admin Login/Register======");
@@ -89,7 +92,7 @@ public class Main{
           break;
 
        case "Lab Technician":
-          System.out.println("Lab Technician dashboard coming soon..");
+          LabTechnicianDashboard.runLabTechnicianPanel(sc, consultationService, labTestService);
           break;
 
         case "Patient":

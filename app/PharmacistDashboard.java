@@ -63,18 +63,11 @@ public class PharmacistDashboard{
  
   public static void consultationBilling(Scanner sc, IBillService billService){
 
-    sc.nextLine();
     System.out.println("Enter the Patient Username:");
     String patientName = sc.nextLine();
-    System.out.println("Enter the Doctor Username:");
+    System.out.println("Enter the Patient Token No:");
     String doctorName = sc.nextLine();
     billService.consultationBilling(patientName, doctorName);
-
-  }
-
-  public static void viewInventory(){
-
-    
 
   }
 
