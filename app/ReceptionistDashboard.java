@@ -31,7 +31,7 @@ public class ReceptionistDashboard{
           break;
 
         case 3:
-          System.out.println("The Consultation Fee is 500");
+          System.out.println("\nThe Consultation Fee is 500\n");
           break;
 
         case 4:

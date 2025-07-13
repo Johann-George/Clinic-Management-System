@@ -33,7 +33,7 @@ public class AdminDashboard{
       
         case 3:
           for(Staff s : adminService.displayAllStaff()){
-            System.out.println("Staff ID:"+s.getId()+"\tStaff Name:"+s.getName()+"\tStaff Role:"+s.getRole());
+            System.out.println("Staff ID:"+s.getId()+"\t\tStaff Name:"+s.getName()+"\t\tStaff Role:"+s.getRole());
           }
           break;
 

@@ -9,5 +9,6 @@ public interface IPatientService{
 
   List<Consultation> viewPrescription(String patientId);
   void registerPatient(Patient patient);
+  Patient getPatientByName(String patientName);
 
 }

@@ -17,11 +17,9 @@ public class DoctorDashboard{
       int choice = sc.nextInt();
       switch (choice) {
         case 1:
-          System.out.println("Enter Token No:");
-          String tokenNo = sc.nextLine();
-          Consultation c = conductConsultation(sc,consultationService, tokenNo);
-          prescribeLabTest(c, sc, consultationService, tokenNo);
-          prescribeMedicine(c, sc, consultationService, tokenNo);
+          Consultation c = conductConsultation(sc,consultationService);
+          prescribeLabTest(c,sc,consultationService);
+          prescribeMedicine(c,sc,consultationService);
           break;
 
         case 2:
@@ -30,8 +28,9 @@ public class DoctorDashboard{
           System.out.println("Enter the patient Username:");
           String patientName = sc.nextLine();
           for(Consultation c1: consultationService.getPatientHistory(patientName)){
-            System.out.println("Consultation ID:"+c1.getConsultationId()+"Diagnosis Details:"+c1.getDiagnosis()+"Consultation Date:"+c1.getConsultationDate()); 
+            System.out.println("Consultation ID:"+c1.getConsultationId()+"\nDiagnosis Details:"+c1.getDiagnosis()+"\nConsultation Date:"+c1.getConsultationDate()); 
           }
+          System.out.println("======================");
           break;
 
         case 3:
@@ -46,11 +45,12 @@ public class DoctorDashboard{
   }
 
   // All consultations details are entered here
-  public static Consultation conductConsultation(Scanner sc, IConsultationService consultationService, String tokenNo){
+  public static Consultation conductConsultation(Scanner sc, IConsultationService consultationService){
 
     sc.nextLine();
-    System.out.println("Enter patient details:");
-    sc.nextLine();
+    System.out.println("Enter Token No:");
+    String tokenNo = sc.nextLine();
+    System.out.println("======Enter patient details=======");
     System.out.println("Enter the Patient Username:");
     String patientName = sc.nextLine();
     System.out.println("Enter the diagnosis details:");
@@ -61,8 +61,10 @@ public class DoctorDashboard{
   }
 
   // Lab tests prescribed by the doctor are entered and displayed here
-  public static void prescribeLabTest(Consultation c, Scanner sc, IConsultationService consultationService, String tokenNo){
-    
+  public static void prescribeLabTest(Consultation c, Scanner sc, IConsultationService consultationService){
+
+    System.out.println("Enter Token No:");
+    String tokenNo = sc.nextLine();
     System.out.println("Enter the number of Lab Tests:");
     int labTestNo = sc.nextInt();
     List<String> labTest = new ArrayList<>();
@@ -77,8 +79,10 @@ public class DoctorDashboard{
   }
 
   // Medicines are prescribed by the doctor are entered and displayed here
-  public static void prescribeMedicine(Consultation c, Scanner sc, IConsultationService consultationService, String tokenNo){
+  public static void prescribeMedicine(Consultation c, Scanner sc, IConsultationService consultationService){
 
+    System.out.println("Enter Token No:");
+    String tokenNo = sc.nextLine();
     System.out.println("Enter the number of prescribed Medicines:");
     int medicineNo = sc.nextInt();
     sc.nextLine();

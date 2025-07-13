@@ -28,4 +28,9 @@ public class PatientServiceImpl implements IPatientService{
     patientRepo.savePatient(patient);
   }
 
+  @Override
+  public Patient getPatientByName(String patientName){
+    return patientRepo.getPatientByName(patientName);
+  }
+
 }

@@ -26,6 +26,7 @@ public class ConsultationServiceImpl implements IConsultationService{
     Patient patient = appointmentRepo.getPatientByName(patientName);
     Consultation consultation = new Consultation(patientName, diagnosis);
     patient.addConsultation(consultation);
+    System.out.println("Token No:"+tokenNo);
     consultationRepo.saveConsultation(tokenNo, consultation);
     return consultation;
   }

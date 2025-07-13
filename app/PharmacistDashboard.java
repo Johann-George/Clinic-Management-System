@@ -53,6 +53,9 @@ public class PharmacistDashboard{
     System.out.println("Enter Patient Token No:"); 
     String tokenNo = sc.nextLine();
     Consultation c = consultationService.getConsultationByTokenNo(tokenNo);
+    if(c == null){
+      System.out.println("Consultation is null");
+    }
     //Stock of each medicine is displayed
     System.out.println("The medicines are:");
     for(String medicine: c.getAllMedicines()){
