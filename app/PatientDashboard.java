@@ -81,7 +81,7 @@ public class PatientDashboard{
     for(String m : medicine){
       System.out.println(m);
     }
-    System.out.println("Lab Tests:");
+    System.out.println("\nLab Tests:");
     for(String lt: labTest){
       System.out.println(lt);
     }
@@ -95,7 +95,8 @@ public class PatientDashboard{
     System.out.println("Enter the patient Name:");
     String patientName = sc.nextLine();
     Patient p = patientService.getPatientByName(patientName);
-    List<LabTest> ltList = new ArrayList<>(labTestService.viewLabTestReports(p.getPatientId()));
+    List<LabTest> ltList = new ArrayList<>();
+    ltList.addAll(labTestService.viewLabTestReports(p.getPatientId()));
     for(LabTest lt: ltList){
       System.out.println("Lab Test Name:"+lt.getName()+" Lab Test Result:"+lt.getResult());
     }

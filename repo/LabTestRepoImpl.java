@@ -32,8 +32,7 @@ public class LabTestRepoImpl implements ILabTestRepo{
   @Override
   public List<LabTest> getLabTestByPatientId(String patientId){
     List<LabTest> ltList = new ArrayList<>();
-    for(Map.Entry<String, LabTest> ltMap: labTests.entrySet()){
-      LabTest lt = ltMap.getValue();
+    for(LabTest lt: labTests.values()){
       if(lt.getPatientId().equals(patientId)){
         ltList.add(lt);
       }

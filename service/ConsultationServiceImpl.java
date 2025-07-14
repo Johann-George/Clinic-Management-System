@@ -24,9 +24,8 @@ public class ConsultationServiceImpl implements IConsultationService{
   @Override
   public Consultation conductConsultation(String tokenNo, String patientName, String diagnosis){
     Patient patient = appointmentRepo.getPatientByName(patientName);
-    Consultation consultation = new Consultation(patientName, diagnosis);
+    Consultation consultation = new Consultation(patient.getPatientId(), diagnosis);
     patient.addConsultation(consultation);
-    System.out.println("Token No:"+tokenNo);
     consultationRepo.saveConsultation(tokenNo, consultation);
     return consultation;
   }

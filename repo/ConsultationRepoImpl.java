@@ -34,9 +34,6 @@ public class ConsultationRepoImpl implements IConsultationRepo{
 
   @Override
   public Consultation getConsultationByTokenNo(String tokenNo) {
-    for(Map.Entry<String, Consultation> c : consultationMap.entrySet()){
-      System.out.println("Token No:"+c.getKey()+" Consultation medicines:"+ c.getValue());
-    }
     return consultationMap.get(tokenNo);
   }
 

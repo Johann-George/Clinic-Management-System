@@ -91,7 +91,8 @@ public class LabTechnicianDashboard{
     System.out.println("Enter the Lab Test ID:");
     String labTestId = sc.nextLine();
     LabTest lt = labTestService.getLabTestById(labTestId);
-    System.out.println("Lab Test ID:"+lt.getId()+" Lab Test Name:"+lt.getName()+" Lab Test Result"+lt.getResult());
+    System.out.println("Lab Test ID:"+lt.getId()+"\nLab Test Name:"+lt.getName()+"\nLab Test Result:"+lt.getResult());
+    System.out.println("============================");
     lt.setStatus("Completed");
 
   }
