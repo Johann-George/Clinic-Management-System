@@ -1,6 +1,9 @@
 package app;
 
 import java.util.Scanner;
+import java.util.InputMismatchException;
+import java.util.Exception;
+
 import models.User;
 import models.Staff;
 import models.Doctor;
@@ -20,29 +23,39 @@ public class AdminDashboard{
     while(true){
     
       System.out.println("1.Add Staff\n2.Delete Staff\n3.Display All Staff\n4.Exit");
-      System.out.println("Enter choice:");
-      int choice = sc.nextInt();
-      switch (choice) {
-        case 1:
-          addStaff(sc,adminService,loginService, appointmentService);
-          break;
+      try{
 
-        case 2:
-          deleteStaff(sc,adminService);
-          break;
-      
-        case 3:
-          for(Staff s : adminService.displayAllStaff()){
-            System.out.println("Staff ID:"+s.getId()+"\t\tStaff Name:"+s.getName()+"\t\tStaff Role:"+s.getRole());
-          }
-          break;
+        System.out.println("Enter choice:");
+        int choice = sc.nextInt();
+        switch (choice) {
+          case 1:
+            addStaff(sc,adminService,loginService, appointmentService);
+            break;
 
-        case 4:
-          return;
+          case 2:
+            deleteStaff(sc,adminService);
+            break;
+        
+          case 3:
+            for(Staff s : adminService.displayAllStaff()){
+              System.out.println("Staff ID:"+s.getId()+"\t\tStaff Name:"+s.getName()+"\t\tStaff Role:"+s.getRole());
+            }
+            break;
 
-        default:
-          System.out.println("Enter a valid input");
-          break;
+          case 4:
+            return;
+
+          default:
+            System.out.println("Enter a valid input");
+            break;
+        }
+
+      }
+      catch(InputMismatchException e){
+        System.out.println("Please enter a value between 1 and 4.");
+      }
+      catch(Exception e){
+        e.printStackTrace();
       }
 
     }

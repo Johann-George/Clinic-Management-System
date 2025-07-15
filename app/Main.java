@@ -3,6 +3,8 @@ package app;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.InputMismatchException;
+import java.util.Exception;
 
 import repo.IAdminRepo;
 import repo.ILoginRepo;
@@ -58,36 +60,43 @@ public class Main{
       System.out.println("3. Patient Login");
       System.out.println("4. Patient Registration");
       System.out.println("5. Exit");
-      System.out.print("Choose an option: ");
-      int choice = sc.nextInt();
-      
-      switch(choice){
-
-        case 1:
-          AdminLogin(adminService, loginService, appointmentService);
-          break;
+      try{
+        System.out.print("Choose an option: ");
+        int choice = sc.nextInt();
         
-        case 2:
-          staffLogin(consultationService, appointmentService, loginService, patientService, billService, labTestService);
-          break;
+        switch(choice){
 
-        case 3:
-          patientLogin(loginService, appointmentService, patientService, billService, labTestService);
-          break;
+          case 1:
+            AdminLogin(adminService, loginService, appointmentService);
+            break;
+          
+          case 2:
+            staffLogin(consultationService, appointmentService, loginService, patientService, billService, labTestService);
+            break;
 
-        case 4:
-          patientRegistration(loginService, appointmentService, patientService);
-          break;
+          case 3:
+            patientLogin(loginService, appointmentService, patientService, billService, labTestService);
+            break;
 
-        case 5:
-          return;
+          case 4:
+            patientRegistration(loginService, appointmentService, patientService);
+            break;
 
-        default:
-          System.out.println("Enter a valid input");
-          break;
+          case 5:
+            return;
 
+          default:
+            System.out.println("Enter a valid input");
+            break;
+
+        }
       }
-      
+      catch(InputMismatchException e){
+        System.out.println("Please enter a number between 1 and 5.");
+      }
+      catch(Exception e){
+        e.printStackTrace();
+      } 
     }
 
   }
