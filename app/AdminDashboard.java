@@ -63,61 +63,77 @@ public class AdminDashboard{
 
   public static void addStaff(Scanner sc,IAdminService adminService,ILoginService loginService, IAppointmentService appointmentService){
 
-    System.out.println("===========================");
-    System.out.println("1.Doctor\n2.Receptionist\n3.Pharmacist\n4.Lab Technician");
-    System.out.println("Enter choice:");
-    int choice = sc.nextInt();
-    Staff staff = null;
-    User user = null;
-    sc.nextLine();
-    System.out.println("Enter name:");
-    String name = sc.nextLine();
-    System.out.println("Enter DOB(format : dd/mm/yyyy):");
-    String dob = sc.nextLine();
+    try{
+      System.out.println("===========================");
+      System.out.println("1.Doctor\n2.Receptionist\n3.Pharmacist\n4.Lab Technician");
+      System.out.println("Enter choice:");
+      int choice = sc.nextInt();
+      Staff staff = null;
+      User user = null;
+      sc.nextLine();
+      System.out.println("Enter name:");
+      String name = sc.nextLine();
+      System.out.println("Enter DOB(format : dd/mm/yyyy):");
+      String dob = sc.nextLine();
 
-    switch (choice) {
-      case 1:
-        System.out.println("Enter specialization:");
-        String spec = sc.nextLine();
-        staff = new Doctor(name,spec,dob,name,dob,choice);
-        user = new User(name, dob, choice, staff);
-        loginService.addLoginCredentials(user);
-        appointmentService.registerDoctor(staff);
-        break;
+      switch (choice) {
+        case 1:
+          System.out.println("Enter specialization:");
+          String spec = sc.nextLine();
+          staff = new Doctor(name,spec,dob,name,dob,choice);
+          user = new User(name, dob, choice, staff);
+          loginService.addLoginCredentials(user);
+          appointmentService.registerDoctor(staff);
+          break;
 
-      case 2:
-        staff = new Receptionist(name,dob,name,dob,choice);
-        user = new User(name, dob, choice, staff);
-        loginService.addLoginCredentials(user);
-        break;
+        case 2:
+          staff = new Receptionist(name,dob,name,dob,choice);
+          user = new User(name, dob, choice, staff);
+          loginService.addLoginCredentials(user);
+          break;
 
-      case 3:
-        staff = new Pharmacist(name,dob,name,dob,choice);
-        user = new User(name, dob, choice, staff);
-        loginService.addLoginCredentials(user);
-        break;
+        case 3:
+          staff = new Pharmacist(name,dob,name,dob,choice);
+          user = new User(name, dob, choice, staff);
+          loginService.addLoginCredentials(user);
+          break;
 
-      case 4:
-        staff = new LabTechnician(name,dob,name,dob,choice);
-        user = new User(name, dob, choice, staff);
-        loginService.addLoginCredentials(user);
-        break;
-    
-      default:
-        System.out.println("Enter a valid input");
-        break;
+        case 4:
+          staff = new LabTechnician(name,dob,name,dob,choice);
+          user = new User(name, dob, choice, staff);
+          loginService.addLoginCredentials(user);
+          break;
+      
+        default:
+          System.out.println("Enter a valid input");
+          break;
+      }
+      adminService.registerStaff(staff);
+      System.out.println("Staff added successfully!");
     }
-    adminService.registerStaff(staff);
-    System.out.println("Staff added successfully!");
-
+    catch(NullPointerException e){
+      System.out.println("Some data values are missing. Please try again.");
+    }
+    catch(Exception e){
+      System.out.println("An unexpected error has occured "+e.getMessage());
+    }
   }
 
   public static void deleteStaff(Scanner sc,IAdminService adminService){
 
-    System.out.println("Enter the Name:");
-    String name = sc.nextLine();
-    adminService.deleteStaff(name);
-    System.out.println("Staff is removed successfully!");
+    try{
+      System.out.println("Enter the Name:");
+      String name = sc.nextLine();
+      adminService.deleteStaff(name);
+      System.out.println("Staff is removed successfully!");
+    }
+    catch(NullPointerException e){
+      System.out.println("Some data values are missing. Please try again");
+    }
+    catch(Exception e){
+      System.out.println("An unexpected error has occured "+e.getMessage());
+      e.printStackTrace();
+    }
 
   } 
 

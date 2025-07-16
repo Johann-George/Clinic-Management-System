@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
-import java.util.Exception;
+import java.time.format.DateTimeParseException;
 
 import repo.IAdminRepo;
 import repo.ILoginRepo;
@@ -103,77 +103,111 @@ public class Main{
 
   public void patientRegistration(ILoginService loginService, IAppointmentService appointmentService, IPatientService patientService){
 
-    sc.nextLine();
-    System.out.println("Enter the Patient Name:");
-    String patientName = sc.nextLine();
-    System.out.println("Enter the Contact No:");
-    String contactNo = sc.nextLine();
-    System.out.println("Enter address:");
-    String address = sc.nextLine();
-    System.out.println("Enter DOB(dd/mm/yy):");
-    String DoB = sc.nextLine();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    LocalDate dob = LocalDate.parse(DoB, formatter);
-    System.out.println("Enter Gender:");
-    String gender = sc.nextLine();
-    Patient p = new Patient(patientName, contactNo, address, dob, gender);
-    User user = new User(patientName, DoB, 5, p);
-    loginService.addLoginCredentials(user);
-    appointmentService.registerPatient(p);
-    patientService.registerPatient(p);
-    System.out.println("Patient is registered successfully");
-
+    try{
+      sc.nextLine();
+      System.out.println("Enter the Patient Name:");
+      String patientName = sc.nextLine();
+      System.out.println("Enter the Contact No:");
+      String contactNo = sc.nextLine();
+      System.out.println("Enter address:");
+      String address = sc.nextLine();
+      System.out.println("Enter DOB(dd/mm/yy):");
+      String DoB = sc.nextLine();
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      try{
+        LocalDate dob = LocalDate.parse(DoB, formatter);
+      }
+      catch(DateTimeParseException e){
+        System.out.println("Invalid date format. Please enter DOB in dd/MM/YYYY format.");
+      }
+      System.out.println("Enter Gender:");
+      String gender = sc.nextLine();
+      Patient p = new Patient(patientName, contactNo, address, dob, gender);
+      User user = new User(patientName, DoB, 5, p);
+      loginService.addLoginCredentials(user);
+      appointmentService.registerPatient(p);
+      patientService.registerPatient(p);
+      System.out.println("Patient is registered successfully");
+    }
+    catch(InputMismatchException e){
+      System.out.println("Invalid input entered!");
+    }
+    catch(NullPointerException e){
+      System.out.println("Some required data is missing. Please try again");
+    }
+    catch(Exception e){
+      System.out.println("Some unexpected error occured:"+ e.getMessage());
+      e.printStackTrace();
+    }
   }
 
   public void patientLogin(ILoginService loginService, IAppointmentService appointmentService, IPatientService patientService, IBillService billService, ILabTestService labTestService){
 
-    sc.nextLine();
-    System.out.println("=====Patient Login=====");
-    System.out.println("Enter Username:");
-    String username = sc.nextLine();
-    System.out.println("Enter Password:");
-    String password = sc.nextLine();
-    User user = loginService.validateLogin(username,password);
-    if(user != null){
-      PatientDashboard.runPatientPanel(sc, appointmentService, patientService, billService, labTestService);
+    try{
+      sc.nextLine();
+      System.out.println("=====Patient Login=====");
+      System.out.println("Enter Username:");
+      String username = sc.nextLine();
+      System.out.println("Enter Password:");
+      String password = sc.nextLine();
+      User user = loginService.validateLogin(username,password);
+      if(user != null){
+        PatientDashboard.runPatientPanel(sc, appointmentService, patientService, billService, labTestService);
+      }
+    }
+    catch(NullPointerException e){
+      System.out.println("Some required data is missing. Please try again");
+    }
+    catch(Exception e){
+      System.out.println("Some unexpected error occured:"+ e.getMessage());
+      e.printStackTrace();
     }
 
-  }
+  }  
 
   public void staffLogin(IConsultationService consultationService, IAppointmentService appointmentService, ILoginService loginService, IPatientService patientService, IBillService billService, ILabTestService labTestService){
 
-    sc.nextLine();
-    System.out.println("=====Staff Login=====");
-    System.out.println("Enter Username:");
-    String username = sc.nextLine();
-    System.out.println("Enter Password:");
-    String password = sc.nextLine();
-    User user = loginService.validateLogin(username,password);
-    switch (user.getRole()) {
+    try{
+      sc.nextLine();
+      System.out.println("=====Staff Login=====");
+      System.out.println("Enter Username:");
+      String username = sc.nextLine();
+      System.out.println("Enter Password:");
+      String password = sc.nextLine();
+      User user = loginService.validateLogin(username,password);
+      switch (user.getRole()) {
 
-      case "Doctor":
-        DoctorDashboard.runDoctorPanel(sc, consultationService);
-        break;
+        case "Doctor":
+          DoctorDashboard.runDoctorPanel(sc, consultationService);
+          break;
 
-      case "Receptionist":
-        ReceptionistDashboard.runReceptionistPanel(sc, appointmentService, billService, loginService, patientService);
-        break;
+        case "Receptionist":
+          ReceptionistDashboard.runReceptionistPanel(sc, appointmentService, billService, loginService, patientService);
+          break;
 
-      case "Pharmacist":
-        PharmacistDashboard.runPharmacistPanel(sc,consultationService, billService);
-        break;
+        case "Pharmacist":
+          PharmacistDashboard.runPharmacistPanel(sc,consultationService, billService);
+          break;
 
-      case "Lab Technician":
-        LabTechnicianDashboard.runLabTechnicianPanel(sc, consultationService, labTestService);
-        break;
+        case "Lab Technician":
+          LabTechnicianDashboard.runLabTechnicianPanel(sc, consultationService, labTestService);
+          break;
 
-      case "Patient":
-        PatientDashboard.runPatientPanel(sc, appointmentService, patientService, billService, labTestService);
-        break;
+        case "Patient":
+          PatientDashboard.runPatientPanel(sc, appointmentService, patientService, billService, labTestService);
+          break;
 
-      default:
-        System.out.println("Enter a valid input");
-        break;
+        default:
+          System.out.println("Enter a valid input");
+          break;
+      }
+    }
+    catch(NullPointerException e){
+      System.out.println("Some required data is missing. Please try again.");
+    }
+    catch(Exception e){
+      System.out.println("Some unexpected error occured:"+ e.getMessage());
+      e.printStackTrace();
     }
 
   }
@@ -181,31 +215,40 @@ public class Main{
 
   private void AdminLogin(IAdminService adminService, ILoginService loginService, IAppointmentService appointmentService){
 
-    //Admin Login and dashboard
-    sc.nextLine();
-    System.out.println("======Admin Login/Register======");
-    System.out.println("Enter Username:");
-    String AdminUserName = sc.nextLine();
-    System.out.println("Enter Password:");
-    String AdminPassword = sc.nextLine();
-    int attempt = 0;
-    while(attempt!=3){
-      if(AdminUserName.equals("admin") && AdminPassword.equals("root")){
-        AdminDashboard.runAdminPanel(sc, adminService, loginService, appointmentService);
-        return;
-      }
-      else{
-        System.out.println("Incorrect Username or password. Please try again!");
-        attempt++;
-        if(attempt<3){
-          System.out.println("Enter Username:");
-          AdminUserName = sc.nextLine();
-          System.out.println("Enter Password:");
-          AdminPassword = sc.nextLine();
+      //Admin Login and dashboard
+    try{
+      sc.nextLine();
+      System.out.println("======Admin Login/Register======");
+      System.out.println("Enter Username:");
+      String AdminUserName = sc.nextLine();
+      System.out.println("Enter Password:");
+      String AdminPassword = sc.nextLine();
+      int attempt = 0;
+      while(attempt!=3){
+        if(AdminUserName.equals("admin") && AdminPassword.equals("root")){
+          AdminDashboard.runAdminPanel(sc, adminService, loginService, appointmentService);
+          return;
+        }
+        else{
+          System.out.println("Incorrect Username or password. Please try again!");
+          attempt++;
+          if(attempt<3){
+            System.out.println("Enter Username:");
+            AdminUserName = sc.nextLine();
+            System.out.println("Enter Password:");
+            AdminPassword = sc.nextLine();
+          }
         }
       }
+      System.out.println("Maximum login attempts reached. Exiting..");
     }
-    System.out.println("Maximum login attempts reached. Exiting..");
+    catch(NullPointerException e){
+      System.out.println("Some required data is missing. Please try again.");
+    }
+    catch(Exception e){
+      System.out.println("An unexpected error occured "+e.getMessage());
+      e.printStackTrace();
+    }
   }
 
   public static void main(String[] args){

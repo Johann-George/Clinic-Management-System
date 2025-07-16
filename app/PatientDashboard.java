@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
+import java.util.InputMismatchException;
 
 import service.IAppointmentService;
 import service.ILabTestService;
@@ -20,31 +21,43 @@ public class PatientDashboard{
   
     while(true){
       System.out.println("1.Book Appointment\n2.View prescription\n3.View Lab Reports\n4.Billing History\n5.Exit");
-      System.out.println("Enter choice:");
-      int choice = sc.nextInt();
+      try{
+        System.out.println("Enter choice:");
+        int choice = sc.nextInt();
 
-      switch (choice) {
-        case 1:
-          bookAppointment(sc, appointmentService);
-          break;
+        switch (choice) {
+          case 1:
+            bookAppointment(sc, appointmentService);
+            break;
 
-        case 2:
-          viewPrescription(sc, patientService);
-          break;
+          case 2:
+            viewPrescription(sc, patientService);
+            break;
 
-        case 3:
-          viewLabReports(sc, patientService, labTestService);
-          break;
+          case 3:
+            viewLabReports(sc, patientService, labTestService);
+            break;
 
-        case 4:
-          billingHistory(sc, billService);
-          break;
+          case 4:
+            billingHistory(sc, billService);
+            break;
 
-        case 5:
-          return;
-      
-        default:
-          break;
+          case 5:
+            return;
+        
+          default:
+            break;
+        }
+      }
+      catch(InputMismatchException e){
+        System.out.println("Invalid input. Please enter a number.");
+      }
+      catch(NullPointerException e){
+        System.out.println("Some data values are missing. Please try again");
+      }
+      catch(Exception e){
+        System.out.println("An unexpected error occured "+e.getMessage());
+        e.printStackTrace();
       }
     }
 
@@ -52,63 +65,113 @@ public class PatientDashboard{
 
   public static void bookAppointment(Scanner sc, IAppointmentService appointmentService){
 
-    System.out.println("Enter the Patient Username:");
-    String patientName= sc.nextLine();
-    System.out.println("Enter the Doctor Username:");
-    String doctorName = sc.nextLine();
-    appointmentService.appointmentScheduling(patientName, doctorName);
-
+    try{
+      System.out.println("Enter the Patient Username:");
+      String patientName= sc.nextLine();
+      System.out.println("Enter the Doctor Username:");
+      String doctorName = sc.nextLine();
+      appointmentService.appointmentScheduling(patientName, doctorName);
+    }
+    catch(NullPointerException e){
+      System.out.println("Some data values are missing. Please try again");
+    }
+    catch(Exception e){
+      System.out.println("An unexpected error occured "+e.getMessage());
+      e.printStackTrace();
+    }
   }
 
   public static void viewPrescription(Scanner sc, IPatientService patientService){
 
-    List<String> medicine = new ArrayList<>();
-    List<String> labTest = new ArrayList<>();
-    sc.nextLine();
-    System.out.println("Enter the patient Name:");
-    String patientName = sc.nextLine();
-    System.out.println("Enter the consultation Date:");
-    String dt = sc.nextLine();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    LocalDate date = LocalDate.parse(dt, formatter);
-    for(Consultation c : patientService.viewPrescription(patientName)){
-      if(c.getConsultationDate().equals(date)){
-        medicine.addAll(c.getAllMedicines());
-        labTest.addAll(c.getAllLabTests());
+    try{
+      List<String> medicine = new ArrayList<>();
+      List<String> labTest = new ArrayList<>();
+      sc.nextLine();
+      System.out.println("Enter the patient Name:");
+      String patientName = sc.nextLine();
+      System.out.println("Enter the consultation Date:");
+      String dt = sc.nextLine();
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      LocalDate date = null;
+      try{
+      date = LocalDate.parse(dt, formatter);
       }
+      catch(DateTimeParseException e){
+        System.out.println("Incorrect date format. Please enter the date in dd/MM/YYYY format.");
+      }
+      for(Consultation c : patientService.viewPrescription(patientName)){
+        if(c.getConsultationDate().equals(date)){
+          medicine.addAll(c.getAllMedicines());
+          labTest.addAll(c.getAllLabTests());
+        }
+      }
+      System.out.println("\nMedicines:");
+      for(String m : medicine){
+        System.out.println(m);
+      }
+      System.out.println("\nLab Tests:");
+      for(String lt: labTest){
+        System.out.println(lt);
+      }
+      System.out.println("===================");
     }
-    System.out.println("\nMedicines:");
-    for(String m : medicine){
-      System.out.println(m);
+    catch(InputMismatchException e){
+      System.out.println("Incorrect input. Please try again");
     }
-    System.out.println("\nLab Tests:");
-    for(String lt: labTest){
-      System.out.println(lt);
+    catch(NullPointerException e){
+      System.out.println("Some data values are missing. Please try again.");
     }
-    System.out.println("===================");
+    catch(Exception e){
+      System.out.println("An unexpected error occured "+e.getMessage());
+      e.printStackTrace();
+    }
 
   }
 
   public static void viewLabReports(Scanner sc, IPatientService patientService, ILabTestService labTestService){
 
-    sc.nextLine();
-    System.out.println("Enter the patient Name:");
-    String patientName = sc.nextLine();
-    Patient p = patientService.getPatientByName(patientName);
-    List<LabTest> ltList = new ArrayList<>();
-    ltList.addAll(labTestService.viewLabTestReports(p.getPatientId()));
-    for(LabTest lt: ltList){
-      System.out.println("Lab Test Name:"+lt.getName()+" Lab Test Result:"+lt.getResult());
+    try{
+      sc.nextLine();
+      System.out.println("Enter the patient Name:");
+      String patientName = sc.nextLine();
+      Patient p = patientService.getPatientByName(patientName);
+      List<LabTest> ltList = new ArrayList<>();
+      ltList.addAll(labTestService.viewLabTestReports(p.getPatientId()));
+      for(LabTest lt: ltList){
+        System.out.println("Lab Test Name:"+lt.getName()+" Lab Test Result:"+lt.getResult());
+      }
+    }
+    catch(InputMismatchException e){
+      System.out.println("Incorrect input. Please try again");
+    }
+    catch(NullPointerException e){
+      System.out.println("Some data values are missing. Please try again.");
+    }
+    catch(Exception e){
+      System.out.println("An unexpected error occured "+e.getMessage());
+      e.printStackTrace();
     }
 
   }
 
   public static void billingHistory(Scanner sc, IBillService billService){
 
-    sc.nextLine();
-    System.out.println("Enter the patient Name:");
-    String patientName = sc.nextLine();
-    billService.generatePatientBillingHistory(patientName);
+    try{
+      sc.nextLine();
+      System.out.println("Enter the patient Name:");
+      String patientName = sc.nextLine();
+      billService.generatePatientBillingHistory(patientName);
+    }
+    catch(InputMismatchException e){
+      System.out.println("Incorrect input. Please try again");
+    }
+    catch(NullPointerException e){
+      System.out.println("Some data values are missing. Please try again.");
+    }
+    catch(Exception e){
+      System.out.println("An unexpected error occured "+e.getMessage());
+      e.printStackTrace();
+    }
 
   }
 
