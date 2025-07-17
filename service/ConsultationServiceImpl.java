@@ -24,7 +24,13 @@ public class ConsultationServiceImpl implements IConsultationService{
   @Override
   public Consultation conductConsultation(String tokenNo, String patientName, String diagnosis){
     Patient patient = appointmentRepo.getPatientByName(patientName);
+    if(patient == null){
+      throw new PatientNotFoundException("Patient does not exist");
+    }
     Consultation consultation = new Consultation(patient.getPatientId(), diagnosis);
+    if(consultation == null){
+      throw new ConsultationNotFoundException("Consultation never happened");
+    }
     patient.addConsultation(consultation);
     consultationRepo.saveConsultation(tokenNo, consultation);
     return consultation;
@@ -33,24 +39,36 @@ public class ConsultationServiceImpl implements IConsultationService{
   @Override
   public List<Consultation> getPatientHistory(String patientName){
     Patient patient = appointmentRepo.getPatientByName(patientName);
+    if(patient == null){
+      throw new PatientNotFoundException("Patient does not exist");
+    }
     return patient.getConsultation();
   }
 
   @Override
   public void addMedicine(String tokenNo, List<String> medicine){
     Consultation consultation = consultationRepo.getConsultationByTokenNo(tokenNo); 
+    if(consultation == null){
+      throw new ConsultationNotFoundException("Consultation never happened");
+    }
     consultation.addMedicine(medicine);
   }
 
   @Override
   public void addLabTest(String tokenNo, List<String> labTest){
     Consultation consultation = consultationRepo.getConsultationByTokenNo(tokenNo); 
+    if(consultation == null){
+      throw new ConsultationNotFoundException("Consultation never happened");
+    }
     consultation.addLabTest(labTest);
   }
 
   @Override
   public Consultation getConsultationByTokenNo(String tokenNo){
-    return consultationRepo.getConsultationByTokenNo(tokenNo);
+    Consultation consultation = consultationRepo.getConsultationByTokenNo(tokenNo);
+    if(consultation == null){
+      throw new ConsultationNotFoundException("Consultation never happened");
+    }
   }
 
 }

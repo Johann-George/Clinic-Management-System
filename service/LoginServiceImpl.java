@@ -4,6 +4,8 @@ import models.Staff;
 import models.User;
 import repo.ILoginRepo;
 import repo.LoginRepoImpl;
+import utils.UserNotFoundException;
+
 import java.util.Map;
 
 public class LoginServiceImpl implements ILoginService{
@@ -16,6 +18,9 @@ public class LoginServiceImpl implements ILoginService{
 
   @Override
   public void addLoginCredentials(User user){
+    if(user == null){
+      throw new UserNotFoundException("User does not exist.");
+    }
     loginRepo.addLoginCredentials(user);
   }
 
