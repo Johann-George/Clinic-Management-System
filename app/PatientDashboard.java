@@ -1,16 +1,17 @@
 package app;
 
-import java.util.Scanner;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
 
 import service.IAppointmentService;
-import service.ILabTestService;
 import service.IPatientService;
 import service.IBillService;
+import service.ILabTestService;
 import models.Consultation;
 import models.Patient;
 import models.LabTest;

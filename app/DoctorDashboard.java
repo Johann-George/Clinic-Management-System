@@ -32,7 +32,7 @@ public class DoctorDashboard{
             for(Consultation c1: consultationService.getPatientHistory(patientName)){
               System.out.println("Consultation ID:"+c1.getConsultationId()+"\nDiagnosis Details:"+c1.getDiagnosis()+"\nConsultation Date:"+c1.getConsultationDate()); 
             }
-            System.out.println("======================")
+            System.out.println("======================");
             break;
 
           case 3:
@@ -60,6 +60,7 @@ public class DoctorDashboard{
   // All consultations details are entered here
   public static Consultation conductConsultation(Scanner sc, IConsultationService consultationService){
 
+    Consultation consultation = null;
     try{
       sc.nextLine();
       System.out.println("Enter Token No:");
@@ -69,8 +70,7 @@ public class DoctorDashboard{
       String patientName = sc.nextLine();
       System.out.println("Enter the diagnosis details:");
       String diagnosisDetails = sc.nextLine();
-      Consultation consultation = consultationService.conductConsultation(tokenNo, patientName, diagnosisDetails);
-      return consultation;
+      consultation = consultationService.conductConsultation(tokenNo, patientName, diagnosisDetails);
     }
     catch(NullPointerException e){
       System.out.println("Some data values are missing. Please try again");
@@ -79,7 +79,7 @@ public class DoctorDashboard{
       System.out.println("An unexpected error occured "+e.getMessage());
       e.printStackTrace();
     }
-
+    return consultation;
   }
 
   // Lab tests prescribed by the doctor are entered and displayed here

@@ -41,6 +41,7 @@ public class PatientServiceImpl implements IPatientService{
     if(patient == null){
       throw new PatientNotFoundException("Patient does not exist");
     }
+    return patient;
   }
 
 }

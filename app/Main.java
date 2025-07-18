@@ -114,8 +114,9 @@ public class Main{
       System.out.println("Enter DOB(dd/mm/yy):");
       String DoB = sc.nextLine();
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      LocalDate dob = null; 
       try{
-        LocalDate dob = LocalDate.parse(DoB, formatter);
+        dob = LocalDate.parse(DoB, formatter);
       }
       catch(DateTimeParseException e){
         System.out.println("Invalid date format. Please enter DOB in dd/MM/YYYY format.");

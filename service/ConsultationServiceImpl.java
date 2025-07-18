@@ -8,6 +8,8 @@ import repo.IAppointmentRepo;
 import repo.IConsultationRepo;
 import repo.IPatientRepo;
 import repo.PatientRepoImpl;
+import utils.PatientNotFoundException;
+import utils.ConsultationNotFoundException;
 
 import java.util.List;
 
@@ -69,6 +71,7 @@ public class ConsultationServiceImpl implements IConsultationService{
     if(consultation == null){
       throw new ConsultationNotFoundException("Consultation never happened");
     }
+    return consultation;
   }
 
 }

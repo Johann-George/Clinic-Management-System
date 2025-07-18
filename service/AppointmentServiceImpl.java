@@ -7,6 +7,7 @@ import models.Appointment;
 import repo.IAppointmentRepo;
 import repo.AppointmentRepoImpl;
 import utils.PatientNotFoundException;
+import utils.StaffNotFoundException;
 
 public class AppointmentServiceImpl implements IAppointmentService{
 

@@ -12,6 +12,8 @@ import repo.BillRepoImpl;
 import models.Bill;
 import models.Consultation;
 import models.Patient;
+import utils.PatientNotFoundException;
+import utils.ConsultationNotFoundException;
 
 public class BillServiceImpl implements IBillService{
 

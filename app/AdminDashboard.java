@@ -2,7 +2,6 @@ package app;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
-import java.util.Exception;
 
 import models.User;
 import models.Staff;
